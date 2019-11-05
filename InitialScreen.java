@@ -12,12 +12,12 @@ public class InitialScreen extends JFrame {
     }
 
     public void showScreen() {
-        startLabel = new JLabel("電子化手順書", JLabel.CENTER);
-        initialscreenContainer.add(startLabel);
+        PrevNextButton prevnextButton = new PrevNextButton(initialscreenContainer);
+        startLabel = new JLabel("電子化手順書");
+        // initialscreenContainer.add(startLabel);
         startLabel.setFont(new Font("Arial", Font.BOLD, 32));
         startLabel.setSize(startLabel.getPreferredSize());
-        PrevNextButton prevnextButton = new PrevNextButton(initialscreenContainer);
-        prevnextButton.showScreen();
+        prevnextButton.showPrevNextButton();
     }
 
 }
