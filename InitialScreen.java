@@ -16,6 +16,8 @@ public class InitialScreen extends JFrame {
         initialscreenContainer.add(startLabel);
         startLabel.setFont(new Font("Arial", Font.BOLD, 32));
         startLabel.setSize(startLabel.getPreferredSize());
+        PrevNextButton prevnextButton = new PrevNextButton(initialscreenContainer);
+        prevnextButton.showScreen();
     }
 
 }
