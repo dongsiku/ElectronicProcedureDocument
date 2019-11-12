@@ -6,11 +6,13 @@ import java.util.Calendar;
 public class IdDateScreen extends JFrame {
 
     Container initialscreenContainer;
-    JLabel idLabel = new JLabel("ID: ");;
-    String id_num_str = "";
+    private JLabel idLabel = new JLabel("ID: ");;
+    private String id_num_str = "";
+    public ProcedureDocData procedureDocData;
 
-    IdDateScreen(Container initial_screen_contanier) {
+    IdDateScreen(Container initial_screen_contanier, ProcedureDocData procedure_doc_data) {
         initialscreenContainer = initial_screen_contanier;
+        procedureDocData = procedure_doc_data;
     }
 
     public void showScreen() {
@@ -23,7 +25,13 @@ public class IdDateScreen extends JFrame {
 
         initialscreenContainer.add(mainPanel);
         prevnextButton.showPrevNextButton();
-
+        prevnextButton.nextButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                procedureDocData.put("operatorID", id_num_str);
+                procedureDocData.put("operationDate", "");
+                procedureDocData.print();
+            }
+        });
     }
 
     private JPanel createIdPanel() {

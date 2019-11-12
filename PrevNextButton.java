@@ -5,7 +5,7 @@ import java.awt.event.*;
 public class PrevNextButton extends JFrame {
 
     Container screenContainer;
-    private JButton prevButton, nextButton;
+    public JButton prevButton, nextButton;
     private JPanel prevnextPanel;
 
     PrevNextButton(Container screen_contanier) {

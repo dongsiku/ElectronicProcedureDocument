@@ -7,16 +7,18 @@ class ElectronicProcedureDocument extends JFrame {
 		JFrame frame = new JFrame("Electronic Procedure Document");
 
 		Container container = frame.getContentPane();
-
 		container.setBackground(Color.white);
 
+		ProcedureDocData procedureDocData = new ProcedureDocData();
 		// GridLayout gl = new GridLayout(3, 2, 5, 10);
 		// container.setLayout(gl);
 
 		InitialScreen initialScreen = new InitialScreen(container);
-		IdDateScreen idDatesSreen = new IdDateScreen(container);
+		IdDateScreen idDateSreen = new IdDateScreen(container, procedureDocData);
+		// ProcedureScreen procedureScreen = new ProcedureScreen(contanier);
 		// initialScreen.showScreen();
-		idDatesSreen.showScreen();
+		idDateSreen.showScreen();
+		// procedureScreen.showScreen();
 
 		frame.setLocation(200, 100);
 		frame.setSize(640, 480);
