@@ -9,6 +9,7 @@ public class IdDateScreen extends JFrame {
     private JLabel idLabel = new JLabel("ID: ");;
     private String id_num_str = "";
     public ProcedureDocData procedureDocData;
+    private String operationYearStr, operationMonthStr, operationDateStr;
 
     IdDateScreen(Container initial_screen_contanier, ProcedureDocData procedure_doc_data) {
         initialscreenContainer = initial_screen_contanier;
@@ -27,8 +28,13 @@ public class IdDateScreen extends JFrame {
         prevnextButton.showPrevNextButton();
         prevnextButton.nextButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                StringBuilder operateionYMDStringBuilder = new StringBuilder();
+                operateionYMDStringBuilder.append(operationYearStr);
+                operateionYMDStringBuilder.append(operationMonthStr);
+                operateionYMDStringBuilder.append(operationDateStr);
+
                 procedureDocData.put("operatorID", id_num_str);
-                procedureDocData.put("operationDate", "");
+                procedureDocData.put("operationDate", operateionYMDStringBuilder.toString());
                 procedureDocData.print();
             }
         });
@@ -87,10 +93,12 @@ public class IdDateScreen extends JFrame {
         String[] combodata_year = new String[10];
         String[] combodata_month = new String[12];
         String[] combodata_date = new String[31];
-        int prev_init_year = 5;
-        int init_year = cal.get(Calendar.YEAR) - prev_init_year;
+        int prevYear = 5;
+        int initYear = cal.get(Calendar.YEAR);
+        int initMonth = cal.get(Calendar.MONTH);
+        int initDate = cal.get(Calendar.DATE);
         for (int i = 0; i < 10; i++) {
-            combodata_year[i] = String.valueOf(i + init_year);
+            combodata_year[i] = String.valueOf(i + initYear - prevYear);
         }
         for (int i = 0; i < 12; i++) {
             combodata_month[i] = String.valueOf(i + 1);
@@ -103,9 +111,12 @@ public class IdDateScreen extends JFrame {
         JComboBox<String> combo_date = new JComboBox<>(combodata_date);
         Dimension dimension_combo = new Dimension(80, 30);
 
-        combo_year.setSelectedIndex(prev_init_year);
-        combo_month.setSelectedIndex(cal.get(Calendar.MONTH));
-        combo_date.setSelectedIndex(cal.get(Calendar.DATE) - 1);
+        combo_year.setSelectedIndex(prevYear);
+        combo_month.setSelectedIndex(initMonth);
+        combo_date.setSelectedIndex(initDate - 1);
+        operationYearStr = String.valueOf(initYear);
+        operationMonthStr = String.format("%02d", initMonth);
+        operationDateStr = String.format("%02d", initDate);
 
         combo_year.setPreferredSize(dimension_combo);
         combo_month.setPreferredSize(dimension_combo);
@@ -115,6 +126,27 @@ public class IdDateScreen extends JFrame {
         datePanel.add(combo_year);
         datePanel.add(combo_month);
         datePanel.add(combo_date);
+        combo_year.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e) {
+                operationYearStr = (String) combo_year.getSelectedItem();
+            }
+
+        });
+        combo_month.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e) {
+                operationMonthStr = String.format("%2s", combo_month.getSelectedItem()).replace(" ", "0");
+            }
+
+        });
+        combo_date.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e) {
+                operationDateStr = String.format("%2s", combo_date.getSelectedItem()).replace(" ", "0");
+            }
+
+        });
         return datePanel;
     }
 
