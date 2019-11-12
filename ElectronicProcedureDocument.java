@@ -14,9 +14,9 @@ class ElectronicProcedureDocument extends JFrame {
 		// container.setLayout(gl);
 
 		InitialScreen initialScreen = new InitialScreen(container);
-		InputIdDate inputiddate = new InputIdDate(container);
+		IdDateScreen idDatesSreen = new IdDateScreen(container);
 		// initialScreen.showScreen();
-		inputiddate.showScreen();
+		idDatesSreen.showScreen();
 
 		frame.setLocation(200, 100);
 		frame.setSize(640, 480);

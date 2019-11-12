@@ -3,13 +3,13 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.Calendar;
 
-public class InputIdDate extends JFrame {
+public class IdDateScreen extends JFrame {
 
     Container initialscreenContainer;
     JLabel idLabel = new JLabel("ID: ");;
     String id_num_str = "";
 
-    InputIdDate(Container initial_screen_contanier) {
+    IdDateScreen(Container initial_screen_contanier) {
         initialscreenContainer = initial_screen_contanier;
     }
 
