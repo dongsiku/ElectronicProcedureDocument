@@ -5,27 +5,27 @@ import java.util.Calendar;
 
 public class IdDateScreen extends JFrame {
 
-    Container initialscreenContainer;
+    JPanel mainPanel = new JPanel();
+
     private JLabel idLabel = new JLabel("ID: ");;
     private String id_num_str = "";
     public ProcedureDocData procedureDocData;
     private String operationYearStr, operationMonthStr, operationDateStr;
+    private PrevNextButton prevnextButton;
 
-    IdDateScreen(Container initial_screen_contanier, ProcedureDocData procedure_doc_data) {
-        initialscreenContainer = initial_screen_contanier;
+    IdDateScreen(JPanel main_panel, PrevNextButton prev_next_button, ProcedureDocData procedure_doc_data) {
+        mainPanel = main_panel;
         procedureDocData = procedure_doc_data;
+        prevnextButton = prev_next_button;
+        JPanel IdDateScreenPanel = new JPanel(new GridLayout(3, 1));
+        IdDateScreenPanel.add(createDatePanel());
+        IdDateScreenPanel.add(createIdPanel());
+        IdDateScreenPanel.add(createKeyboardPanel());
+
+        mainPanel.add(IdDateScreenPanel);
     }
 
     public void showScreen() {
-        PrevNextButton prevnextButton = new PrevNextButton(initialscreenContainer);
-        JPanel mainPanel = new JPanel(new GridLayout(3, 1));
-
-        mainPanel.add(createDatePanel());
-        mainPanel.add(createIdPanel());
-        mainPanel.add(createKeyboardPanel());
-
-        initialscreenContainer.add(mainPanel);
-        prevnextButton.showPrevNextButton();
         prevnextButton.nextButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 StringBuilder operateionYMDStringBuilder = new StringBuilder();

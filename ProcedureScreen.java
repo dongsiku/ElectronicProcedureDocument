@@ -8,7 +8,7 @@ public class ProcedureScreen extends JFrame {
     private int subprocedureNum; // 0: 操作前確認, 1: 起動操作, 2:操作後確認
 
     ProcedureScreen(Container contanier, int procedure_num, int subProcedureNum) {
-        creenContainer = contanier;
+        screenContainer = contanier;
         procedureNum = procedure_num;
         subprocedureNum = subProcedureNum;
     }
