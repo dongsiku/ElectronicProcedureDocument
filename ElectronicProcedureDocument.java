@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
 
 class ElectronicProcedureDocument extends JFrame {
 
@@ -18,14 +19,26 @@ class ElectronicProcedureDocument extends JFrame {
 		// GridLayout gl = new GridLayout(3, 2, 5, 10);
 		// container.setLayout(gl);
 
-		InitialScreen initialScreen = new InitialScreen(mainPanels, prevnextButton);
-		IdDateScreen idDateSreen = new IdDateScreen(mainPanels, prevnextButton, procedureDocData);
+		InitialScreen initialScreen = new InitialScreen(mainPanels);
+		IdDateScreen idDateSreen = new IdDateScreen(mainPanels, procedureDocData);
 		// ProcedureScreen procedureScreen = new ProcedureScreen(contanier);
 		// initialScreen.showScreen();
 		// procedureScreen.showScreen();
-		initialScreen.listen();
-		idDateSreen.listen();
-
+		prevnextButton.nextButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int canMove = 1;
+				String currentScreenName = mainPanels.currentScreenName();
+				canMove *= idDateSreen.update(currentScreenName);
+				if (canMove > 0) {
+					mainPanels.next();
+				}
+			}
+		});
+		prevnextButton.prevButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				mainPanels.previous();
+			}
+		});
 		mainPanels.init();
 		frame.setLocation(200, 100);
 		frame.setSize(640, 480);

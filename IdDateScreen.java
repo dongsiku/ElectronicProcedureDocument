@@ -11,11 +11,11 @@ public class IdDateScreen extends JFrame {
     private String id_num_str = "";
     public ProcedureDocData procedureDocData;
     private String operationYearStr, operationMonthStr, operationDateStr;
-    private PrevNextButton prevnextButton;
+    private String SCREEN_NAME = "IdDateScreen";
 
-    IdDateScreen(MainPanels main_panels, PrevNextButton prev_next_button, ProcedureDocData procedure_doc_data) {
+    IdDateScreen(MainPanels main_panels, ProcedureDocData procedure_doc_data) {
         procedureDocData = procedure_doc_data;
-        prevnextButton = prev_next_button;
+
         JPanel IdDateScreenPanel = new JPanel(new GridLayout(3, 1));
         IdDateScreenPanel.add(createDatePanel());
         IdDateScreenPanel.add(createIdPanel());
@@ -25,25 +25,18 @@ public class IdDateScreen extends JFrame {
         mainPanels.add(IdDateScreenPanel, "IdDateScreen");
     }
 
-    public void listen() {
-        prevnextButton.nextButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                StringBuilder operateionYMDStringBuilder = new StringBuilder();
-                operateionYMDStringBuilder.append(operationYearStr);
-                operateionYMDStringBuilder.append(operationMonthStr);
-                operateionYMDStringBuilder.append(operationDateStr);
+    public int update(String currentScreenName) {
+        if (currentScreenName.equals(SCREEN_NAME)) {
+            StringBuilder operateionYMDStringBuilder = new StringBuilder();
+            operateionYMDStringBuilder.append(operationYearStr);
+            operateionYMDStringBuilder.append(operationMonthStr);
+            operateionYMDStringBuilder.append(operationDateStr);
 
-                procedureDocData.put("operatorID", id_num_str);
-                procedureDocData.put("operationDate", operateionYMDStringBuilder.toString());
-                procedureDocData.print();
-                mainPanels.next();
-            }
-        });
-        prevnextButton.prevButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                mainPanels.previous();
-            }
-        });
+            procedureDocData.put("operatorID", id_num_str);
+            procedureDocData.put("operationDate", operateionYMDStringBuilder.toString());
+            procedureDocData.print();
+        }
+        return 1; // ok
     }
 
     private JPanel createIdPanel() {
