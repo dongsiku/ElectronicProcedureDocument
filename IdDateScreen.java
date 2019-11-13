@@ -5,7 +5,7 @@ import java.util.Calendar;
 
 public class IdDateScreen extends JFrame {
 
-    MainPanels mainPanels;
+    public MainPanels mainPanels;
 
     private JLabel idLabel = new JLabel("ID: ");;
     private String id_num_str = "";
@@ -22,7 +22,7 @@ public class IdDateScreen extends JFrame {
         IdDateScreenPanel.add(createKeyboardPanel());
 
         mainPanels = main_panels;
-        mainPanels.add(IdDateScreenPanel);
+        mainPanels.add(IdDateScreenPanel, "IdDateScreen");
     }
 
     public void listen() {

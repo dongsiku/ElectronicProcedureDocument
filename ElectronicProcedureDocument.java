@@ -5,6 +5,7 @@ class ElectronicProcedureDocument extends JFrame {
 
 	public static void main(String[] args) {
 		JFrame frame = new JFrame("Electronic Procedure Document");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Container container = frame.getContentPane();
 		container.setBackground(Color.white);
 		// JPanel mainPanel = new JPanel();
@@ -25,7 +26,7 @@ class ElectronicProcedureDocument extends JFrame {
 		initialScreen.listen();
 		idDateSreen.listen();
 
-		mainPanels.initializeContainer();
+		mainPanels.init();
 		frame.setLocation(200, 100);
 		frame.setSize(640, 480);
 		frame.setVisible(true);

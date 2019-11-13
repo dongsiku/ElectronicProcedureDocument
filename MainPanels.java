@@ -1,59 +1,37 @@
 import javax.swing.*;
 import java.awt.*;
-import java.util.List;
-import java.util.ArrayList;
 
 class MainPanels {
-    public static List<JPanel> mainPanels = new ArrayList<JPanel>();
-    public int currentMainPanelNum = 0;
-    Container container;
-    public int mainPanelsSize;
+    public JPanel mainPanels = new JPanel();
+    public CardLayout layout = new CardLayout();
+    public Container container;
+    public int mainPanelsSize = 0;
+    /*
+     * layout = new CardLayout(); cardPanel.setLayout(layout);
+     * 
+     * cardPanel.add(card1, "button");
+     */
 
     MainPanels(Container root_container) {
         container = root_container;
+        mainPanels.setLayout(layout);
     }
 
-    public void add(JPanel mainPanel) {
-        mainPanels.add(mainPanel);
-        mainPanelsSize = mainPanels.size();
+    public void add(JPanel mainPanel, String screenName) {
+        mainPanels.add(mainPanel, screenName);
+        mainPanelsSize += 1;
         System.out.printf("mainPanelsSize is %d\n", mainPanelsSize);
     }
 
-    private void updateContainer() {
-        for (JPanel mainPanel : mainPanels) {
-            container.add(mainPanel);
-        }
-        System.out.printf("currentMainPanelNum is %d\n", currentMainPanelNum);
-    }
-
-    public void initializeContainer() {
-        updateContainer();
+    public void show() {
+        container.add(mainPanels);
     }
 
     public void next() {
-        if (mainPanelsSize > currentMainPanelNum) {
-            currentMainPanelNum += 1;
-            previousnextCommon();
-        }
+        layout.next(mainPanels);
     }
 
     public void previous() {
-        if (0 < currentMainPanelNum) {
-            currentMainPanelNum -= 1;
-            previousnextCommon();
-        }
+        layout.previous(mainPanels);
     }
-
-    private void previousnextCommon() {
-        int mainPanelsSize = mainPanels.size();
-        for (int i = 0; i < mainPanelsSize + 1; i++) {
-            if (i == currentMainPanelNum) {
-                mainPanels.get(i).setVisible(true);
-            } else {
-                mainPanels.get(i).setVisible(false);
-            }
-        }
-        updateContainer();
-    }
-
 }

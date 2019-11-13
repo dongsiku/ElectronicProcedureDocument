@@ -6,13 +6,13 @@ public class InitialScreen extends JFrame {
 
     private JLabel startLabel;
     private PrevNextButton prevnextButton;
-    MainPanels mainPanels;
+    public MainPanels mainPanels;
 
     InitialScreen(MainPanels main_panels, PrevNextButton prev_next_button) {
         prevnextButton = prev_next_button;
 
         mainPanels = main_panels;
-        mainPanels.add(createInitialScreenPanel());
+        mainPanels.add(createInitialScreenPanel(), "InitialScreen");
     }
 
     private JPanel createInitialScreenPanel() {
