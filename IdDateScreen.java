@@ -5,7 +5,7 @@ import java.util.Calendar;
 
 public class IdDateScreen extends JFrame {
 
-    JPanel mainPanel = new JPanel();
+    MainPanels mainPanels;
 
     private JLabel idLabel = new JLabel("ID: ");;
     private String id_num_str = "";
@@ -13,8 +13,7 @@ public class IdDateScreen extends JFrame {
     private String operationYearStr, operationMonthStr, operationDateStr;
     private PrevNextButton prevnextButton;
 
-    IdDateScreen(JPanel main_panel, PrevNextButton prev_next_button, ProcedureDocData procedure_doc_data) {
-        mainPanel = main_panel;
+    IdDateScreen(MainPanels main_panels, PrevNextButton prev_next_button, ProcedureDocData procedure_doc_data) {
         procedureDocData = procedure_doc_data;
         prevnextButton = prev_next_button;
         JPanel IdDateScreenPanel = new JPanel(new GridLayout(3, 1));
@@ -22,10 +21,11 @@ public class IdDateScreen extends JFrame {
         IdDateScreenPanel.add(createIdPanel());
         IdDateScreenPanel.add(createKeyboardPanel());
 
-        mainPanel.add(IdDateScreenPanel);
+        mainPanels = main_panels;
+        mainPanels.add(IdDateScreenPanel);
     }
 
-    public void showScreen() {
+    public void listen() {
         prevnextButton.nextButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 StringBuilder operateionYMDStringBuilder = new StringBuilder();
@@ -36,6 +36,12 @@ public class IdDateScreen extends JFrame {
                 procedureDocData.put("operatorID", id_num_str);
                 procedureDocData.put("operationDate", operateionYMDStringBuilder.toString());
                 procedureDocData.print();
+                mainPanels.next();
+            }
+        });
+        prevnextButton.prevButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                mainPanels.previous();
             }
         });
     }

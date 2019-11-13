@@ -1,16 +1,18 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
 
 public class InitialScreen extends JFrame {
 
     private JLabel startLabel;
     private PrevNextButton prevnextButton;
-    private JPanel mainPanel = new JPanel();
+    MainPanels mainPanels;
 
-    InitialScreen(JPanel main_panel, PrevNextButton prev_next_button) {
-        mainPanel = main_panel;
+    InitialScreen(MainPanels main_panels, PrevNextButton prev_next_button) {
         prevnextButton = prev_next_button;
-        mainPanel.add("init", createInitialScreenPanel());
+
+        mainPanels = main_panels;
+        mainPanels.add(createInitialScreenPanel());
     }
 
     private JPanel createInitialScreenPanel() {
@@ -23,6 +25,19 @@ public class InitialScreen extends JFrame {
 
         initialscreenPanel.add(startLabel);
         return initialscreenPanel;
+    }
+
+    public void listen() {
+        prevnextButton.nextButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                mainPanels.next();
+            }
+        });
+        prevnextButton.prevButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                mainPanels.previous();
+            }
+        });
     }
 
 }

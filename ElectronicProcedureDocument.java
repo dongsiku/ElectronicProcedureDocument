@@ -7,7 +7,8 @@ class ElectronicProcedureDocument extends JFrame {
 		JFrame frame = new JFrame("Electronic Procedure Document");
 		Container container = frame.getContentPane();
 		container.setBackground(Color.white);
-		JPanel mainPanel = new JPanel();
+		// JPanel mainPanel = new JPanel();
+		MainPanels mainPanels = new MainPanels(container);
 
 		PrevNextButton prevnextButton = new PrevNextButton(container);
 		prevnextButton.showPrevNextButton();
@@ -16,13 +17,15 @@ class ElectronicProcedureDocument extends JFrame {
 		// GridLayout gl = new GridLayout(3, 2, 5, 10);
 		// container.setLayout(gl);
 
-		InitialScreen initialScreen = new InitialScreen(mainPanel, prevnextButton);
-		IdDateScreen idDateSreen = new IdDateScreen(mainPanel, prevnextButton, procedureDocData);
+		InitialScreen initialScreen = new InitialScreen(mainPanels, prevnextButton);
+		IdDateScreen idDateSreen = new IdDateScreen(mainPanels, prevnextButton, procedureDocData);
 		// ProcedureScreen procedureScreen = new ProcedureScreen(contanier);
 		// initialScreen.showScreen();
-		idDateSreen.showScreen();
 		// procedureScreen.showScreen();
-		container.add(mainPanel);
+		initialScreen.listen();
+		idDateSreen.listen();
+
+		mainPanels.initializeContainer();
 		frame.setLocation(200, 100);
 		frame.setSize(640, 480);
 		frame.setVisible(true);
