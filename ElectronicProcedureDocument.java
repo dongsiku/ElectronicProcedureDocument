@@ -10,7 +10,7 @@ class ElectronicProcedureDocument extends JFrame {
 		Container container = frame.getContentPane();
 		container.setBackground(Color.white);
 		// JPanel mainPanel = new JPanel();
-		MainPanels mainPanels = new MainPanels(container);
+		MainPanels mainPanels = new MainPanels();
 
 		PrevNextButton prevnextButton = new PrevNextButton(container);
 		prevnextButton.showPrevNextButton();
@@ -39,7 +39,7 @@ class ElectronicProcedureDocument extends JFrame {
 				mainPanels.previous();
 			}
 		});
-		mainPanels.init();
+		container.add(mainPanels.mainPanels);
 		frame.setLocation(200, 100);
 		frame.setSize(640, 480);
 		frame.setVisible(true);

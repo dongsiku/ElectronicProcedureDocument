@@ -6,7 +6,6 @@ import java.util.List;
 class MainPanels {
     public JPanel mainPanels = new JPanel();
     public CardLayout layout = new CardLayout();
-    public Container container;
     public int mainPanelsSize = 0;
     public List<String> screenNameList = new ArrayList<>();
     private int currentScreenNum = 0;
@@ -16,8 +15,7 @@ class MainPanels {
      * cardPanel.add(card1, "button");
      */
 
-    MainPanels(Container root_container) {
-        container = root_container;
+    MainPanels() {
         mainPanels.setLayout(layout);
     }
 
@@ -26,10 +24,6 @@ class MainPanels {
         screenNameList.add(screenName);
         mainPanelsSize += 1;
         System.out.printf("mainPanelsSize is %d\n", mainPanelsSize);
-    }
-
-    public void init() {
-        container.add(mainPanels);
     }
 
     public void next() {
