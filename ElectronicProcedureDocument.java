@@ -1,12 +1,11 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.io.IOException;
 import java.util.ArrayList;
 
 class ElectronicProcedureDocument extends JFrame {
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) {
 		JFrame frame = new JFrame("Electronic Procedure Document");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Container container = frame.getContentPane();
@@ -39,12 +38,10 @@ class ElectronicProcedureDocument extends JFrame {
 				canMove *= idDateSreen.update(currentScreenName);
 				canMove *= selectOperationScreen.update(currentScreenName);
 				for (int i = 0; i < 3; i++) {
-					try {
-						procedureScreen[i].updateOperatorNum(currentScreenName);
-					} catch (IOException e1) {
-						// TODO Auto-generated catch block
-						// e1.printStackTrace();
-					}
+					System.out.print("i: "); // debug
+					System.out.println(i); // debug
+					procedureScreen[i].updateOperatorNum();
+
 					canMove *= procedureScreen[i].update(currentScreenName);
 				}
 				if (canMove > 0) {
