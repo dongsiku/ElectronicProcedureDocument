@@ -1,10 +1,12 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.IOException;
+import java.util.ArrayList;
 
 class ElectronicProcedureDocument extends JFrame {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		JFrame frame = new JFrame("Electronic Procedure Document");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Container container = frame.getContentPane();
@@ -22,6 +24,11 @@ class ElectronicProcedureDocument extends JFrame {
 		InitialScreen initialScreen = new InitialScreen(mainPanels);
 		IdDateScreen idDateSreen = new IdDateScreen(mainPanels, procedureDocData);
 		SelectOperationScreen selectOperationScreen = new SelectOperationScreen(mainPanels, procedureDocData);
+		ProcedureScreen[] procedureScreen = new ProcedureScreen[3];
+		for (int i = 0; i < 3; i++) {
+			procedureScreen[i] = new ProcedureScreen(mainPanels, procedureDocData, i + 1);
+		}
+
 		// ProcedureScreen procedureScreen = new ProcedureScreen(contanier);
 		// initialScreen.showScreen();
 		// procedureScreen.showScreen();
@@ -31,6 +38,15 @@ class ElectronicProcedureDocument extends JFrame {
 				String currentScreenName = mainPanels.currentScreenName();
 				canMove *= idDateSreen.update(currentScreenName);
 				canMove *= selectOperationScreen.update(currentScreenName);
+				for (int i = 0; i < 3; i++) {
+					try {
+						procedureScreen[i].updateOperatorNum(currentScreenName);
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						// e1.printStackTrace();
+					}
+					canMove *= procedureScreen[i].update(currentScreenName);
+				}
 				if (canMove > 0) {
 					mainPanels.next();
 				}

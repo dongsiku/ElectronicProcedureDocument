@@ -4,6 +4,10 @@ import java.util.Map;
 class ProcedureDocData {
     public Map<String, String> data = new HashMap<>();
 
+    ProcedureDocData() {
+        data.put("operatorNum", "-1");
+    }
+
     /*
      * operatorID, operationDate, operationName
      */
