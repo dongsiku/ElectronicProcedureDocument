@@ -1,4 +1,6 @@
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
@@ -11,9 +13,11 @@ public class ProcedureScreen extends JFrame {
     private int operation_num = -1;
     private int procedureNum;
     private int procedureStepNum;
-    private List<String> procedureList;
-    // private static
-    // private static
+
+    private List<String> procedureNameList = new ArrayList<>();
+    private List<String> hasNumberForm = new ArrayList<>();
+    private List<JCheckBox> operationCheckbox = new ArrayList<>();
+    private JPanel ProcedureScreenPanel;
 
     ProcedureScreen() {
         ;
@@ -23,9 +27,7 @@ public class ProcedureScreen extends JFrame {
         procedureDocData = procedure_doc_data;
         procedureStepNum = procedure_step_num;
         SCREEN_NAME = "ProcedureScreen" + String.valueOf(procedure_step_num);
-
-        JPanel ProcedureScreenPanel = createProcedureScreenPanel();
-
+        ProcedureScreenPanel = createProcedureScreenPanel();
         mainPanels = main_panels;
         mainPanels.add(ProcedureScreenPanel, SCREEN_NAME);
     }
@@ -37,42 +39,31 @@ public class ProcedureScreen extends JFrame {
         return 1; // ok
     }
 
-    private JPanel createProcedureScreenPanel() {
-        JPanel procedureScreenPanel = new JPanel();
-
-        return procedureScreenPanel;
-    }
-
     public void updateOperatorNum() {
         procedureNum = Integer.parseInt(procedureDocData.data.get("operatorNum"));
         if (procedureNum > -1) {
             System.out.println("procedureStepNum: " + procedureStepNum);
-            readProcedureList();
+            createProcedureNameList();
+            ProcedureScreenPanel = createProcedureScreenPanel();
         }
     }
 
-    private void readProcedureList() {
-        createProcedureList(procedureNum, procedureStepNum);
-        List<String> procedureNameList = new ArrayList<>(); // debug
-        List<String> hasNumberForm = new ArrayList<>(); // debug
-        int procedureListLength = procedureList.size();
-        for (int i = 0; i < procedureListLength; i++) {
-            StringTokenizer std = new StringTokenizer(procedureList.get(i), ",");
-            while (std.hasMoreTokens()) {
-                procedureNameList.add(std.nextToken());
-                hasNumberForm.add(std.nextToken());
-            }
+    private JPanel createProcedureScreenPanel() {
+        int procedureNameListSize = procedureNameList.size();
+        JPanel procedureScreenPanel = new JPanel(new GridLayout(procedureNameListSize, 1));
+        for (int i = 0; i < procedureNameListSize; i++) {
+            operationCheckbox.add(new JCheckBox(procedureNameList.get(i)));
+            operationCheckbox.get(i).setHorizontalAlignment(JLabel.CENTER);
+            procedureScreenPanel.add(operationCheckbox.get(i));
         }
-        for (int i = 0; i < procedureNameList.size(); i++) {
-            System.out.println(procedureNameList.get(i) + ": " + hasNumberForm.get(i));
-        }
+        return procedureScreenPanel;
     }
 
-    private void createProcedureList(int procedure_number, int procedure_step_num) {
-        procedureList = new ArrayList<>();
-        switch (procedure_number) {
+    private void createProcedureNameList() {
+        List<String> procedureList = new ArrayList<>();
+        switch (procedureNum) {
         case 0:
-            switch (procedure_step_num) {
+            switch (procedureStepNum) {
             case 0:
                 procedureList.add("1. ポンプAP1の不作動を確認．, 0");
                 procedureList.add("2. バルブAV1の閉を確認．, 0");
@@ -96,7 +87,7 @@ public class ProcedureScreen extends JFrame {
             }
             break;
         case 1:
-            switch (procedure_step_num) {
+            switch (procedureStepNum) {
             case 0:
                 procedureList.add("1. 装置XのポンプXP1の不作動を確認．, 0");
                 procedureList.add("2. 装置XのポンプXP2の不作動を確認．, 0");
@@ -125,6 +116,16 @@ public class ProcedureScreen extends JFrame {
             }
             break;
         }
-
+        int procedureListLength = procedureList.size();
+        for (int i = 0; i < procedureListLength; i++) {
+            StringTokenizer std = new StringTokenizer(procedureList.get(i), ",");
+            while (std.hasMoreTokens()) {
+                procedureNameList.add(std.nextToken());
+                hasNumberForm.add(std.nextToken());
+            }
+        }
+        for (int i = 0; i < procedureNameList.size(); i++) {
+            System.out.println(procedureNameList.get(i) + ": " + hasNumberForm.get(i));
+        }
     }
 }
