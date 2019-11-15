@@ -2,10 +2,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 class ProcedureDocData {
-    public Map<String, String> data = new HashMap<>();
+    public Map<String, Integer> data = new HashMap<>();
 
     ProcedureDocData() {
-        data.put("operatorNum", "-1");
+        data.put("operationNum", -1);
     }
 
     /*
@@ -17,7 +17,7 @@ class ProcedureDocData {
         }
     }
 
-    public void put(String key, String value) {
+    public void put(String key, int value) {
         data.put(key, value);
     }
 

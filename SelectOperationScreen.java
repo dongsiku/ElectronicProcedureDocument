@@ -25,7 +25,7 @@ public class SelectOperationScreen extends JFrame {
             if (operation_num < 0) {
                 return 0; // NG
             }
-            procedureDocData.put("operatorNum", String.valueOf(operation_num - 1));
+            procedureDocData.put("operationNum", operation_num);
             procedureDocData.print();
         }
         return 1; // ok
@@ -48,7 +48,7 @@ public class SelectOperationScreen extends JFrame {
             operationCheckbox[this_box_num].addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     operationCheckbox[another_box_num].setSelected(false);
-                    operation_num = this_box_num + 1;
+                    operation_num = this_box_num;
                 }
             });
         }

@@ -10,8 +10,7 @@ public class ProcedureScreen extends JFrame {
     public MainPanels mainPanels;
     public ProcedureDocData procedureDocData;
     private String SCREEN_NAME;
-    private int operation_num = -1;
-    private int procedureNum;
+    private int operationNum = -1;
     private int procedureStepNum;
 
     private List<String> procedureNameList = new ArrayList<>();
@@ -40,8 +39,8 @@ public class ProcedureScreen extends JFrame {
     }
 
     public void updateOperatorNum() {
-        procedureNum = Integer.parseInt(procedureDocData.data.get("operatorNum"));
-        if (procedureNum > -1) {
+        operationNum = procedureDocData.data.get("operationNum");
+        if (operationNum > -1) {
             System.out.println("procedureStepNum: " + procedureStepNum);
             createProcedureNameList();
             ProcedureScreenPanel = createProcedureScreenPanel();
@@ -61,7 +60,7 @@ public class ProcedureScreen extends JFrame {
 
     private void createProcedureNameList() {
         List<String> procedureList = new ArrayList<>();
-        switch (procedureNum) {
+        switch (operationNum) {
         case 0:
             switch (procedureStepNum) {
             case 0:

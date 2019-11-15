@@ -10,7 +10,8 @@ public class IdDateScreen extends JFrame {
     private JLabel idLabel = new JLabel("ID: ");;
     private String id_num_str = "";
     public ProcedureDocData procedureDocData;
-    private String operationYearStr, operationMonthStr, operationDateStr;
+    private int operationYear, operationMonth, operationDate;
+    private int operationYMD;
     private String SCREEN_NAME = "IdDateScreen";
 
     IdDateScreen(MainPanels main_panels, ProcedureDocData procedure_doc_data) {
@@ -27,14 +28,16 @@ public class IdDateScreen extends JFrame {
 
     public int update(String currentScreenName) {
         if (currentScreenName.equals(SCREEN_NAME)) {
-            StringBuilder operateionYMDStringBuilder = new StringBuilder();
-            operateionYMDStringBuilder.append(operationYearStr);
-            operateionYMDStringBuilder.append(operationMonthStr);
-            operateionYMDStringBuilder.append(operationDateStr);
 
-            procedureDocData.put("operatorID", id_num_str);
-            procedureDocData.put("operationDate", operateionYMDStringBuilder.toString());
-            procedureDocData.print();
+            if (id_num_str.equals("")) {
+                return 0;
+            }
+            if (id_num_str.length() == 4) {
+                createOperationYMD();
+                procedureDocData.put("operatorID", Integer.parseInt(id_num_str));
+                procedureDocData.put("operationDate", operationYMD);
+                procedureDocData.print();
+            }
         }
         return 1; // ok
     }
@@ -113,9 +116,10 @@ public class IdDateScreen extends JFrame {
         combo_year.setSelectedIndex(prevYear);
         combo_month.setSelectedIndex(initMonth);
         combo_date.setSelectedIndex(initDate - 1);
-        operationYearStr = String.valueOf(initYear);
-        operationMonthStr = String.format("%02d", initMonth);
-        operationDateStr = String.format("%02d", initDate);
+
+        operationYear = initYear;
+        operationMonth = initMonth;
+        operationDate = initDate;
 
         combo_year.setPreferredSize(dimension_combo);
         combo_month.setPreferredSize(dimension_combo);
@@ -128,25 +132,31 @@ public class IdDateScreen extends JFrame {
         combo_year.addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent e) {
-                operationYearStr = (String) combo_year.getSelectedItem();
+                operationDate = combo_year.getSelectedIndex() + initYear - prevYear;
+                createOperationYMD();
             }
 
         });
         combo_month.addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent e) {
-                operationMonthStr = String.format("%2s", combo_month.getSelectedItem()).replace(" ", "0");
+                operationDate = combo_month.getSelectedIndex();
+                createOperationYMD();
             }
 
         });
         combo_date.addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent e) {
-                operationDateStr = String.format("%2s", combo_date.getSelectedItem()).replace(" ", "0");
+                operationDate = combo_date.getSelectedIndex();
+                createOperationYMD();
             }
 
         });
         return datePanel;
     }
 
+    private void createOperationYMD() {
+        operationYMD = (operationYear % 100) * 10000 + operationMonth * 100 + operationDate;
+    }
 }
