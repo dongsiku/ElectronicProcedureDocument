@@ -25,7 +25,7 @@ public class SelectOperationScreen extends JFrame {
             if (operation_num < 0) {
                 return 0; // NG
             }
-            procedureDocData.put("operatorNum", String.valueOf(operation_num));
+            procedureDocData.put("operatorNum", String.valueOf(operation_num - 1));
             procedureDocData.print();
         }
         return 1; // ok

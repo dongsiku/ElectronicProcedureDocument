@@ -1,7 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.ArrayList;
 
 class ElectronicProcedureDocument extends JFrame {
 
@@ -25,7 +24,7 @@ class ElectronicProcedureDocument extends JFrame {
 		SelectOperationScreen selectOperationScreen = new SelectOperationScreen(mainPanels, procedureDocData);
 		ProcedureScreen[] procedureScreen = new ProcedureScreen[3];
 		for (int i = 0; i < 3; i++) {
-			procedureScreen[i] = new ProcedureScreen(mainPanels, procedureDocData, i + 1);
+			procedureScreen[i] = new ProcedureScreen(mainPanels, procedureDocData, i);
 		}
 
 		// ProcedureScreen procedureScreen = new ProcedureScreen(contanier);
@@ -38,10 +37,7 @@ class ElectronicProcedureDocument extends JFrame {
 				canMove *= idDateSreen.update(currentScreenName);
 				canMove *= selectOperationScreen.update(currentScreenName);
 				for (int i = 0; i < 3; i++) {
-					System.out.print("i: "); // debug
-					System.out.println(i); // debug
 					procedureScreen[i].updateOperatorNum();
-
 					canMove *= procedureScreen[i].update(currentScreenName);
 				}
 				if (canMove > 0) {

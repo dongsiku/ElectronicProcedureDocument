@@ -7,10 +7,11 @@ public class ProcedureScreen extends JFrame {
 
     public MainPanels mainPanels;
     public ProcedureDocData procedureDocData;
-    private static String SCREEN_NAME;
+    private String SCREEN_NAME;
     private int operation_num = -1;
-    private static int procedureNum;
-    private static int procedureStepNum;
+    private int procedureNum;
+    private int procedureStepNum;
+    private List<String> procedureList;
     // private static
     // private static
 
@@ -42,30 +43,24 @@ public class ProcedureScreen extends JFrame {
         return procedureScreenPanel;
     }
 
-    public int updateOperatorNum() {
-        // if (currentScreenName.equals(SCREEN_NAME)) {
+    public void updateOperatorNum() {
         procedureNum = Integer.parseInt(procedureDocData.data.get("operatorNum"));
-        System.out.println("foo"); // debug
-        if (procedureNum > 0) {
-            System.out.println("foo2"); // debug
+        if (procedureNum > -1) {
+            System.out.println("procedureStepNum: " + procedureStepNum);
             readProcedureList();
-            System.out.println("foo3"); // debug
         }
-        return procedureStepNum; // debug
-        // }
     }
 
-    private static void readProcedureList() {
-        ProcedureLists procedureLists = new ProcedureLists();
+    private void readProcedureList() {
+        createProcedureList(procedureNum, procedureStepNum);
         List<String> procedureNameList = new ArrayList<>(); // debug
-        List<Integer> hasNumberForm = new ArrayList<>(); // debug
-        int procedureListLength = procedureLists.procedureLists[procedureNum - 1][procedureStepNum - 1].length;
+        List<String> hasNumberForm = new ArrayList<>(); // debug
+        int procedureListLength = procedureList.size();
         for (int i = 0; i < procedureListLength; i++) {
-            StringTokenizer std = new StringTokenizer(
-                    procedureLists.procedureLists[procedureNum - 1][procedureStepNum - 1][i], ",");
+            StringTokenizer std = new StringTokenizer(procedureList.get(i), ",");
             while (std.hasMoreTokens()) {
                 procedureNameList.add(std.nextToken());
-                hasNumberForm.add(Integer.parseInt(std.nextToken().trim()));
+                hasNumberForm.add(std.nextToken());
             }
         }
         for (int i = 0; i < procedureNameList.size(); i++) {
@@ -73,4 +68,63 @@ public class ProcedureScreen extends JFrame {
         }
     }
 
+    private void createProcedureList(int procedure_number, int procedure_step_num) {
+        procedureList = new ArrayList<>();
+        switch (procedure_number) {
+        case 0:
+            switch (procedure_step_num) {
+            case 0:
+                procedureList.add("1. ポンプAP1の不作動を確認．, 0");
+                procedureList.add("2. バルブAV1の閉を確認．, 0");
+                procedureList.add("3. バルブAV2の閉を確認．, 0");
+                procedureList.add("4. ヒータAH1の不作動を確認．, ");
+                break;
+            case 1:
+                procedureList.add("5. ポンプAP1を起動．, 0");
+                procedureList.add("6. ポンプAP1の作動を確認．, 0");
+                procedureList.add("7. バルブAV1の開操作．, 0");
+                procedureList.add("8. バルブAV1の開を確認．, 0");
+                procedureList.add("9. バルブAV2の開操作．, 0");
+                procedureList.add("10. バルブAV2の開を確認．, 0");
+                procedureList.add("11. ヒータAH1を起動．, 0");
+                procedureList.add("12. ヒータAH1の起動を確認．, ");
+                break;
+            case 2:
+                procedureList.add("13. AV1の質量流量FAV1を記録．（単位はkg / s）, 1");
+                procedureList.add("14. AV2の質量流量FAV2を記録．（定常的には， FAV1に一致）, ");
+                break;
+            }
+            break;
+        case 1:
+            switch (procedure_step_num) {
+            case 0:
+                procedureList.add("1. 装置XのポンプXP1の不作動を確認．, 0");
+                procedureList.add("2. 装置XのポンプXP2の不作動を確認．, 0");
+                procedureList.add("3. 装置XのバルブXV1の閉を確認．, 0");
+                procedureList.add("4. 装置XのバルブXV2の閉を確認．, 0");
+                procedureList.add("5. 装置XのバルブXV3の閉を確認．, ");
+                break;
+            case 1:
+                procedureList.add("6. ポンプXP1を起動．, 0");
+                procedureList.add("7. ポンプXP1の作動を確認．, 0");
+                procedureList.add("8. ポンプXP2を起動．, 0");
+                procedureList.add("9. ポンプXP2の作動を確認．, 0");
+                procedureList.add("10. バルブXV1の開操作．, 0");
+                procedureList.add("11. バルブXV1の開を確認．, 0");
+                procedureList.add("12. 原料1の装置Xへの質量流量F1を記録．（単位はkg / s）, 1");
+                procedureList.add("13. バルブXV2の開操作．, 0");
+                procedureList.add("14. バルブXV2の開を確認．, 0");
+                procedureList.add("15. 原料2の装置Xへの質量流量F2を記録．（単位はkg / s）, 1");
+                procedureList.add("16. バルブXV3の開操作．, 0");
+                procedureList.add("17. バルブXV3の開を確認．, ");
+                break;
+            case 2:
+                procedureList.add("18. 装置Xからの製品の質量流量を記録．, 1");
+                procedureList.add("19. 装置Xの温度が制限以下であることを確認．, ");
+                break;
+            }
+            break;
+        }
+
+    }
 }
