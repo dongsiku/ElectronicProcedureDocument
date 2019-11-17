@@ -118,6 +118,8 @@ public class ProcedureScreen extends JFrame {
             break;
         }
         int procedureListLength = procedureList.size();
+        procedureNameList = new ArrayList<>();
+        hasNumberForm = new ArrayList<>();
         for (int i = 0; i < procedureListLength; i++) {
             StringTokenizer std = new StringTokenizer(procedureList.get(i), ",");
             while (std.hasMoreTokens()) {
