@@ -39,9 +39,10 @@ public class ProcedureScreen extends JFrame {
         return 1; // ok
     }
 
-    public void updateOperatorNum() {
-        operationNum = procedureDocData.data.get("operationNum");
-        if (operationNum > -1) {
+    public void updateOperationNum() {
+        int newoperationNum = procedureDocData.data.get("operationNum");
+        if (operationNum != newoperationNum) {
+            operationNum = newoperationNum;
             System.out.println("procedureStepNum: " + procedureStepNum);
             createProcedureNameList();
             ProcedureScreenPanel = createProcedureScreenPanel();

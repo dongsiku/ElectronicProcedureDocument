@@ -39,7 +39,7 @@ class ElectronicProcedureDocument extends JFrame {
 				canMove *= idDateSreen.update(currentScreenName);
 				canMove *= selectOperationScreen.update(currentScreenName);
 				for (int i = 0; i < 3; i++) {
-					procedureScreen[i].updateOperatorNum();
+					procedureScreen[i].updateOperationNum();
 					canMove *= procedureScreen[i].update(currentScreenName);
 				}
 				if (canMove > 0) {
