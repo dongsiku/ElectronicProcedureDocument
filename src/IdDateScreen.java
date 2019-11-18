@@ -120,7 +120,7 @@ public class IdDateScreen extends JFrame {
         combo_date.setSelectedIndex(initDate - 1);
 
         operationYear = initYear;
-        operationMonth = initMonth;
+        operationMonth = initMonth + 1;
         operationDate = initDate;
 
         combo_year.setPreferredSize(dimension_combo);
@@ -134,16 +134,14 @@ public class IdDateScreen extends JFrame {
         combo_year.addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent e) {
-                operationDate = combo_year.getSelectedIndex() + initYear - prevYear;
-                createOperationYMD();
+                operationYear = combo_year.getSelectedIndex() + initYear - prevYear;
             }
 
         });
         combo_month.addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent e) {
-                operationDate = combo_month.getSelectedIndex();
-                createOperationYMD();
+                operationMonth = combo_month.getSelectedIndex() + 1;
             }
 
         });
@@ -151,7 +149,6 @@ public class IdDateScreen extends JFrame {
 
             public void actionPerformed(ActionEvent e) {
                 operationDate = combo_date.getSelectedIndex();
-                createOperationYMD();
             }
 
         });
