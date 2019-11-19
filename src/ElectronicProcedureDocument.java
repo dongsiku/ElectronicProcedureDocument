@@ -23,8 +23,8 @@ class ElectronicProcedureDocument extends JFrame {
 		InitialScreen initialScreen = new InitialScreen(mainPanels);
 		IdDateScreen idDateSreen = new IdDateScreen(mainPanels, procedureDocData);
 		SelectOperationScreen selectOperationScreen = new SelectOperationScreen(mainPanels, procedureDocData);
-		ProcedureScreen[] procedureScreen0 = new ProcedureScreen[3];
-		for (int i = 0; i < 3; i++) {
+		ProcedureScreen[] procedureScreen0 = new ProcedureScreen[4];
+		for (int i = 0; i < 4; i++) {
 			procedureScreen0[i] = new ProcedureScreen(mainPanels, procedureDocData, 0, i);
 		}
 		ProcedureScreen[] procedureScreen1 = new ProcedureScreen[3];

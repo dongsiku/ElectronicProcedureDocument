@@ -30,7 +30,14 @@ public class ProcedureScreen extends JFrame {
                 procedure_step_num);
         procedureNameList = createProcedureNameList.returnProcedureNameList();
         hasNumberForm = createProcedureNameList.returnHasNumberForm();
-        SCREEN_NAME = "ProcedureScreen" + String.valueOf(procedure_step_num);
+
+        StringBuilder buf = new StringBuilder();
+        buf.append("ProcedureScreen");
+        buf.append(operation_num);
+        buf.append("_step");
+        buf.append(procedure_step_num);
+        SCREEN_NAME = buf.toString();
+
         mainPanels = main_panels;
         mainPanels.add(createProcedureScreenPanel(), SCREEN_NAME);
     }
