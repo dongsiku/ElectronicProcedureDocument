@@ -31,16 +31,11 @@ class ProcedureDocData {
      */
 
     private void initializeChecklist() {
-        for (int i = 0; i < 4; i++) {
-            CreateProcedureNameList createProcedureNameList0 = new CreateProcedureNameList(0, i);
-            for (String procedureNameList : createProcedureNameList0.returnProcedureNameList()) {
-                checklist.put(procedureNameList, -1);
-            }
-        }
-        for (int j = 0; j < 8; j++) {
-            CreateProcedureNameList createProcedureNameList1 = new CreateProcedureNameList(1, j);
-            for (String procedureNameList : createProcedureNameList1.returnProcedureNameList()) {
-                checklist.put(procedureNameList, -1);
+        for (int i = 0; i < CreateProcedureNameList.procedureList.length; i++) {
+            for (int j = 0; j < CreateProcedureNameList.procedureList[i].length; j++) {
+                for (int k = 0; k < CreateProcedureNameList.procedureList[i][j].length; k++) {
+                    checklist.put(CreateProcedureNameList.procedureList[i][j][k], -1);
+                }
             }
         }
     }

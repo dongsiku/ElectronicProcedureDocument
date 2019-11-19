@@ -3,6 +3,7 @@ package src;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 
 class ElectronicProcedureDocument extends JFrame {
 
@@ -23,13 +24,13 @@ class ElectronicProcedureDocument extends JFrame {
 		InitialScreen initialScreen = new InitialScreen(mainPanels);
 		IdDateScreen idDateSreen = new IdDateScreen(mainPanels, procedureDocData);
 		SelectOperationScreen selectOperationScreen = new SelectOperationScreen(mainPanels, procedureDocData);
-		ProcedureScreen[] procedureScreen0 = new ProcedureScreen[4];
-		for (int i = 0; i < 4; i++) {
-			procedureScreen0[i] = new ProcedureScreen(mainPanels, procedureDocData, 0, i);
-		}
-		ProcedureScreen[] procedureScreen1 = new ProcedureScreen[3];
-		for (int i = 0; i < 3; i++) {
-			procedureScreen1[i] = new ProcedureScreen(mainPanels, procedureDocData, 1, i);
+
+		ArrayList<ArrayList<ProcedureScreen>> procedureScreen = new ArrayList<ArrayList<ProcedureScreen>>();
+		for (int i = 0; i < 2; i++) {
+			procedureScreen.add(new ArrayList<ProcedureScreen>());
+			for (int j = 0; j < CreateProcedureNameList.procedureList[i].length; j++) {
+				procedureScreen.get(i).add(new ProcedureScreen(mainPanels, procedureDocData, i, j));
+			}
 		}
 
 		// ProcedureScreen procedureScreen = new ProcedureScreen(contanier);
@@ -41,11 +42,10 @@ class ElectronicProcedureDocument extends JFrame {
 				String currentScreenName = mainPanels.currentScreenName();
 				canMove *= idDateSreen.update(currentScreenName);
 				canMove *= selectOperationScreen.update(currentScreenName);
-				for (int i = 0; i < 3; i++) {
-					canMove *= procedureScreen0[i].update(currentScreenName);
-				}
-				for (int i = 0; i < 3; i++) {
-					canMove *= procedureScreen1[i].update(currentScreenName);
+				for (int i = 0; i < 2; i++) {
+					for (int j = 0; j < CreateProcedureNameList.procedureList[i].length; j++) {
+						canMove *= procedureScreen.get(i).get(j).update(currentScreenName);
+					}
 				}
 				if (canMove > 0) {
 					mainPanels.next();

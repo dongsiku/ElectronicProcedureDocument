@@ -11,31 +11,27 @@ public class ProcedureScreen extends JFrame {
     public MainPanels mainPanels;
     public ProcedureDocData procedureDocData;
     private String SCREEN_NAME;
-    // private int operationNum = -1;
-    // private int procedureStepNum;
-    private int procedureNameListSize = 0;
+    private int operationNum = -1;
+    private int procedurePanelNum;
+    private int procedureListLength = 0;
 
-    private List<String> procedureNameList = new ArrayList<>();
+    // private List<String> procedureNameList = new ArrayList<>();
     private List<JCheckBox> procedureCheckbox = new ArrayList<>();
     // private JPanel ProcedureScreenPanel;
-
-    ProcedureScreen() {
-        ;
-    };
+    CreateProcedureNameList createProcedureNameList;
 
     ProcedureScreen(MainPanels main_panels, ProcedureDocData procedure_doc_data, int operation_num,
-            int procedure_step_num) {
+            int procedure_panel_num) {
         procedureDocData = procedure_doc_data;
-        // procedureStepNum = procedure_step_num;
-        CreateProcedureNameList createProcedureNameList = new CreateProcedureNameList(operation_num,
-                procedure_step_num);
-        procedureNameList = createProcedureNameList.returnProcedureNameList();
+        operationNum = operation_num;
+        procedurePanelNum = procedure_panel_num;
+        createProcedureNameList = new CreateProcedureNameList();
 
         StringBuilder buf = new StringBuilder();
         buf.append("ProcedureScreen");
         buf.append(operation_num);
-        buf.append("_step");
-        buf.append(procedure_step_num);
+        buf.append("_");
+        buf.append(procedure_panel_num);
         SCREEN_NAME = buf.toString();
 
         mainPanels = main_panels;
@@ -51,10 +47,11 @@ public class ProcedureScreen extends JFrame {
     }
 
     private JPanel createProcedureScreenPanel() {
-        procedureNameListSize = procedureNameList.size();
-        JPanel procedureScreenPanel = new JPanel(new GridLayout(procedureNameListSize, 1));
-        for (int i = 0; i < procedureNameListSize; i++) {
-            procedureCheckbox.add(new JCheckBox(procedureNameList.get(i)));
+        procedureListLength = CreateProcedureNameList.procedureList[operationNum][procedurePanelNum].length;
+        JPanel procedureScreenPanel = new JPanel(new GridLayout(procedureListLength, 1));
+        for (int i = 0; i < procedureListLength; i++) {
+            procedureCheckbox
+                    .add(new JCheckBox(CreateProcedureNameList.procedureList[operationNum][procedurePanelNum][i]));
             procedureCheckbox.get(i).setHorizontalAlignment(JLabel.CENTER);
             procedureScreenPanel.add(procedureCheckbox.get(i));
         }
@@ -62,11 +59,12 @@ public class ProcedureScreen extends JFrame {
     }
 
     private void listenProcedureCheckbox() {
-        for (int i = 0; i < procedureNameListSize; i++) {
+        for (int i = 0; i < procedureListLength; i++) {
             int this_box_num = i;
             procedureCheckbox.get(this_box_num).addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    procedureDocData.checklist.put(procedureNameList.get(this_box_num), 1);
+                    procedureDocData.checklist.put(
+                            CreateProcedureNameList.procedureList[operationNum][procedurePanelNum][this_box_num], 1);
                 }
             });
         }
