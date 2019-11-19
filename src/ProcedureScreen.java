@@ -15,17 +15,13 @@ public class ProcedureScreen extends JFrame {
     private int procedurePanelNum;
     private int procedureListLength = 0;
 
-    // private List<String> procedureNameList = new ArrayList<>();
     private List<JCheckBox> procedureCheckbox = new ArrayList<>();
-    // private JPanel ProcedureScreenPanel;
-    CreateProcedureNameList createProcedureNameList;
 
     ProcedureScreen(MainPanels main_panels, ProcedureDocData procedure_doc_data, int operation_num,
             int procedure_panel_num) {
         procedureDocData = procedure_doc_data;
         operationNum = operation_num;
         procedurePanelNum = procedure_panel_num;
-        createProcedureNameList = new CreateProcedureNameList();
 
         StringBuilder buf = new StringBuilder();
         buf.append("ProcedureScreen");
@@ -47,11 +43,10 @@ public class ProcedureScreen extends JFrame {
     }
 
     private JPanel createProcedureScreenPanel() {
-        procedureListLength = CreateProcedureNameList.procedureList[operationNum][procedurePanelNum].length;
+        procedureListLength = ProcedureList.procedureList[operationNum][procedurePanelNum].length;
         JPanel procedureScreenPanel = new JPanel(new GridLayout(procedureListLength, 1));
         for (int i = 0; i < procedureListLength; i++) {
-            procedureCheckbox
-                    .add(new JCheckBox(CreateProcedureNameList.procedureList[operationNum][procedurePanelNum][i]));
+            procedureCheckbox.add(new JCheckBox(ProcedureList.procedureList[operationNum][procedurePanelNum][i]));
             procedureCheckbox.get(i).setHorizontalAlignment(JLabel.CENTER);
             procedureScreenPanel.add(procedureCheckbox.get(i));
         }
@@ -63,8 +58,8 @@ public class ProcedureScreen extends JFrame {
             int this_box_num = i;
             procedureCheckbox.get(this_box_num).addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    procedureDocData.checklist.put(
-                            CreateProcedureNameList.procedureList[operationNum][procedurePanelNum][this_box_num], 1);
+                    procedureDocData.checklist
+                            .put(ProcedureList.procedureList[operationNum][procedurePanelNum][this_box_num], 1);
                 }
             });
         }

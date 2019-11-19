@@ -28,7 +28,7 @@ class ElectronicProcedureDocument extends JFrame {
 		ArrayList<ArrayList<ProcedureScreen>> procedureScreen = new ArrayList<ArrayList<ProcedureScreen>>();
 		for (int i = 0; i < 2; i++) {
 			procedureScreen.add(new ArrayList<ProcedureScreen>());
-			for (int j = 0; j < CreateProcedureNameList.procedureList[i].length; j++) {
+			for (int j = 0; j < ProcedureList.procedureList[i].length; j++) {
 				procedureScreen.get(i).add(new ProcedureScreen(mainPanels, procedureDocData, i, j));
 			}
 		}
@@ -43,7 +43,7 @@ class ElectronicProcedureDocument extends JFrame {
 				canMove *= idDateSreen.update(currentScreenName);
 				canMove *= selectOperationScreen.update(currentScreenName);
 				for (int i = 0; i < 2; i++) {
-					for (int j = 0; j < CreateProcedureNameList.procedureList[i].length; j++) {
+					for (int j = 0; j < ProcedureList.procedureList[i].length; j++) {
 						canMove *= procedureScreen.get(i).get(j).update(currentScreenName);
 					}
 				}
