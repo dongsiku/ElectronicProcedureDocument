@@ -24,9 +24,9 @@ class ElectronicProcedureDocument extends JFrame {
 		InitialScreen initialScreen = new InitialScreen(mainPanels);
 		IdDateScreen idDateSreen = new IdDateScreen(mainPanels, procedureDocData);
 		SelectOperationScreen selectOperationScreen = new SelectOperationScreen(mainPanels, procedureDocData);
-		ProcedureScreen[] procedureScreen = new ProcedureScreen[3];
+		ProcedureScreen[] procedureScreen1 = new ProcedureScreen[3];
 		for (int i = 0; i < 3; i++) {
-			procedureScreen[i] = new ProcedureScreen(mainPanels, procedureDocData, i);
+			procedureScreen1[i] = new ProcedureScreen(mainPanels, procedureDocData, 1, i);
 		}
 
 		// ProcedureScreen procedureScreen = new ProcedureScreen(contanier);
@@ -39,8 +39,8 @@ class ElectronicProcedureDocument extends JFrame {
 				canMove *= idDateSreen.update(currentScreenName);
 				canMove *= selectOperationScreen.update(currentScreenName);
 				for (int i = 0; i < 3; i++) {
-					procedureScreen[i].updateOperationNum();
-					canMove *= procedureScreen[i].update(currentScreenName);
+					procedureScreen1[i].updateOperationNum();
+					canMove *= procedureScreen1[i].update(currentScreenName);
 				}
 				if (canMove > 0) {
 					mainPanels.next();
