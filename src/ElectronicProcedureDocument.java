@@ -12,18 +12,21 @@ class ElectronicProcedureDocument extends JFrame {
 		Container container = frame.getContentPane();
 		container.setBackground(Color.white);
 		// JPanel mainPanel = new JPanel();
-		MainPanels mainPanels = new MainPanels();
+		ProcedureDocData procedureDocData = new ProcedureDocData();
+		MainPanels mainPanels = new MainPanels(procedureDocData);
 
 		PrevNextButton prevnextButton = new PrevNextButton(container);
 		prevnextButton.showPrevNextButton();
 
-		ProcedureDocData procedureDocData = new ProcedureDocData();
 		// GridLayout gl = new GridLayout(3, 2, 5, 10);
 		// container.setLayout(gl);
-
 		InitialScreen initialScreen = new InitialScreen(mainPanels);
 		IdDateScreen idDateSreen = new IdDateScreen(mainPanels, procedureDocData);
 		SelectOperationScreen selectOperationScreen = new SelectOperationScreen(mainPanels, procedureDocData);
+		ProcedureScreen[] procedureScreen0 = new ProcedureScreen[3];
+		for (int i = 0; i < 3; i++) {
+			procedureScreen0[i] = new ProcedureScreen(mainPanels, procedureDocData, 0, i);
+		}
 		ProcedureScreen[] procedureScreen1 = new ProcedureScreen[3];
 		for (int i = 0; i < 3; i++) {
 			procedureScreen1[i] = new ProcedureScreen(mainPanels, procedureDocData, 1, i);
@@ -39,7 +42,9 @@ class ElectronicProcedureDocument extends JFrame {
 				canMove *= idDateSreen.update(currentScreenName);
 				canMove *= selectOperationScreen.update(currentScreenName);
 				for (int i = 0; i < 3; i++) {
-					procedureScreen1[i].updateOperationNum();
+					canMove *= procedureScreen0[i].update(currentScreenName);
+				}
+				for (int i = 0; i < 3; i++) {
 					canMove *= procedureScreen1[i].update(currentScreenName);
 				}
 				if (canMove > 0) {
