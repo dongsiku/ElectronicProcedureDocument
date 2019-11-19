@@ -25,7 +25,7 @@ class CreateProcedureNameList {
                 procedureNameList.add("1. ポンプAP1の不作動を確認．"); // boolean
                 procedureNameList.add("2. バルブAV1の閉を確認．"); // boolean
                 procedureNameList.add("3. バルブAV2の閉を確認．"); // boolean
-                procedureNameList.add("4. ヒータAH1の不作動を確認．, ");
+                procedureNameList.add("4. ヒータAH1の不作動を確認．"); // boolean
                 break;
             case 1:
                 procedureNameList.add("5. ポンプAP1を起動．"); // boolean
@@ -35,13 +35,13 @@ class CreateProcedureNameList {
                 procedureNameList.add("9. バルブAV2の開操作．"); // boolean
                 procedureNameList.add("10. バルブAV2の開を確認．"); // boolean
                 procedureNameList.add("11. ヒータAH1を起動．"); // boolean
-                procedureNameList.add("12. ヒータAH1の起動を確認．, ");
+                procedureNameList.add("12. ヒータAH1の起動を確認．"); // boolean
                 break;
             case 2:
                 procedureNameList.add("13. AV1の質量流量FAV1を記録．（単位はkg / s）"); // double
                 break;
             case 3:
-                procedureNameList.add("14. AV2の質量流量FAV2を記録．（定常的には， FAV1に一致）, ");
+                procedureNameList.add("14. AV2の質量流量FAV2を記録．（定常的には， FAV1に一致）"); // double
                 break;
             }
             break;
@@ -78,6 +78,8 @@ class CreateProcedureNameList {
                 break;
             case 6:
                 procedureNameList.add("18. 装置Xからの製品の質量流量を記録．"); // double
+                break;
+            case 7:
                 procedureNameList.add("19. 装置Xの温度が制限以下であることを確認．"); // boolean
                 break;
             }

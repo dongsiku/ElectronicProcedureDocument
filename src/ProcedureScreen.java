@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.awt.event.*;
 
 public class ProcedureScreen extends JFrame {
 
@@ -12,9 +13,10 @@ public class ProcedureScreen extends JFrame {
     private String SCREEN_NAME;
     // private int operationNum = -1;
     // private int procedureStepNum;
+    private int procedureNameListSize = 0;
 
     private List<String> procedureNameList = new ArrayList<>();
-    private List<JCheckBox> operationCheckbox = new ArrayList<>();
+    private List<JCheckBox> procedureCheckbox = new ArrayList<>();
     // private JPanel ProcedureScreenPanel;
 
     ProcedureScreen() {
@@ -23,7 +25,7 @@ public class ProcedureScreen extends JFrame {
 
     ProcedureScreen(MainPanels main_panels, ProcedureDocData procedure_doc_data, int operation_num,
             int procedure_step_num) {
-        // procedureDocData = procedure_doc_data;
+        procedureDocData = procedure_doc_data;
         // procedureStepNum = procedure_step_num;
         CreateProcedureNameList createProcedureNameList = new CreateProcedureNameList(operation_num,
                 procedure_step_num);
@@ -38,24 +40,36 @@ public class ProcedureScreen extends JFrame {
 
         mainPanels = main_panels;
         mainPanels.add(createProcedureScreenPanel(), SCREEN_NAME);
+        listenProcedureCheckbox();
     }
 
     public int update(String currentScreenName) {
         if (currentScreenName.equals(SCREEN_NAME)) {
-            ;
+            procedureDocData.printChecklist();
         }
         return 1; // ok
     }
 
     private JPanel createProcedureScreenPanel() {
-        int procedureNameListSize = procedureNameList.size();
+        procedureNameListSize = procedureNameList.size();
         JPanel procedureScreenPanel = new JPanel(new GridLayout(procedureNameListSize, 1));
         for (int i = 0; i < procedureNameListSize; i++) {
-            operationCheckbox.add(new JCheckBox(procedureNameList.get(i)));
-            operationCheckbox.get(i).setHorizontalAlignment(JLabel.CENTER);
-            procedureScreenPanel.add(operationCheckbox.get(i));
+            procedureCheckbox.add(new JCheckBox(procedureNameList.get(i)));
+            procedureCheckbox.get(i).setHorizontalAlignment(JLabel.CENTER);
+            procedureScreenPanel.add(procedureCheckbox.get(i));
         }
         return procedureScreenPanel;
+    }
+
+    private void listenProcedureCheckbox() {
+        for (int i = 0; i < procedureNameListSize; i++) {
+            int this_box_num = i;
+            procedureCheckbox.get(this_box_num).addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    procedureDocData.checklist.put(procedureNameList.get(this_box_num), 1);
+                }
+            });
+        }
     }
 
 }
