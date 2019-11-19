@@ -14,7 +14,6 @@ public class ProcedureScreen extends JFrame {
     // private int procedureStepNum;
 
     private List<String> procedureNameList = new ArrayList<>();
-    private List<String> hasNumberForm = new ArrayList<>();
     private List<JCheckBox> operationCheckbox = new ArrayList<>();
     // private JPanel ProcedureScreenPanel;
 
@@ -29,7 +28,6 @@ public class ProcedureScreen extends JFrame {
         CreateProcedureNameList createProcedureNameList = new CreateProcedureNameList(operation_num,
                 procedure_step_num);
         procedureNameList = createProcedureNameList.returnProcedureNameList();
-        hasNumberForm = createProcedureNameList.returnHasNumberForm();
 
         StringBuilder buf = new StringBuilder();
         buf.append("ProcedureScreen");
