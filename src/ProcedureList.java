@@ -2,7 +2,7 @@ package src;
 
 class ProcedureList {
         // int operationNum, procedureStepNum;
-        public static String procedureList[][][] = {
+        public static final String PROCEDURE_LIST[][][] = {
                         { { "1. ポンプAP1の不作動を確認．", "2. バルブAV1の閉を確認．", "3. バルブAV2の閉を確認．", "4. ヒータAH1の不作動を確認．" },
                                         { "5. ポンプAP1を起動．", "6. ポンプAP1の作動を確認．", "7. バルブAV1の開操作．", "8. バルブAV1の開を確認．",
                                                         "9. バルブAV2の開操作．", "10. バルブAV2の開を確認．", "11. ヒータAH1を起動．",
@@ -18,7 +18,7 @@ class ProcedureList {
                                         { "15. 原料2の装置Xへの質量流量F2を記録．（単位はkg / s）" },
                                         { "16. バルブXV3の開操作．", "17. バルブXV3の開を確認．" }, { "18. 装置Xからの製品の質量流量を記録．" },
                                         { "19. 装置Xの温度が制限以下であることを確認．" } } };
-        public static int procedureListInfo[][][] = { { { 0, 0 }, { 1, 0 }, { 2, 1 }, { 2, 1 } },
+        public static final int PROCEDURE_LIST_INFO[][][] = { { { 0, 0 }, { 1, 0 }, { 2, 1 }, { 2, 1 } },
                         { { 0, 0 }, { 1, 0 }, { 1, 1 }, { 1, 0 }, { 1, 1 }, { 1, 0 }, { 2, 1 }, { 2, 0 } } }; // step_num,
                                                                                                               // is_double
 }
