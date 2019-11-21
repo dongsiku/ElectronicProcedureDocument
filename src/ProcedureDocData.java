@@ -5,7 +5,7 @@ import java.util.Map;
 
 class ProcedureDocData {
     public Map<String, Integer> data = new HashMap<>();
-    public Map<String, Integer> checklist = new HashMap<>();
+    public Map<String, Double> checklist = new HashMap<>();
     // TODO: fix data and checklist to static
 
     ProcedureDocData() {
@@ -32,10 +32,10 @@ class ProcedureDocData {
      */
 
     private void initializeChecklist() {
-        for (int i = 0; i < ProcedureList.procedureList.length; i++) {
-            for (int j = 0; j < ProcedureList.procedureList[i].length; j++) {
-                for (int k = 0; k < ProcedureList.procedureList[i][j].length; k++) {
-                    checklist.put(ProcedureList.procedureList[i][j][k], -1);
+        for (int i = 0; i < ProcedureList.PROCEDURE_LIST.length; i++) {
+            for (int j = 0; j < ProcedureList.PROCEDURE_LIST[i].length; j++) {
+                for (int k = 0; k < ProcedureList.PROCEDURE_LIST[i][j].length; k++) {
+                    checklist.put(ProcedureList.PROCEDURE_LIST[i][j][k], -1.0);
                 }
             }
         }
