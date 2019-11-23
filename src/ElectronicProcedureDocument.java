@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
+import java.util.List;
 
 class ElectronicProcedureDocument extends JFrame {
 
@@ -12,30 +13,27 @@ class ElectronicProcedureDocument extends JFrame {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Container container = frame.getContentPane();
 		container.setBackground(Color.white);
-		// JPanel mainPanel = new JPanel();
+
 		ProcedureDocData procedureDocData = new ProcedureDocData();
 		MainPanels mainPanels = new MainPanels(procedureDocData);
 
 		PrevNextButton prevnextButton = new PrevNextButton(container);
 		prevnextButton.showPrevNextButton();
 
-		// GridLayout gl = new GridLayout(3, 2, 5, 10);
-		// container.setLayout(gl);
 		InitialScreen initialScreen = new InitialScreen(mainPanels);
 		IdDateScreen idDateSreen = new IdDateScreen(mainPanels, procedureDocData);
 		SelectOperationScreen selectOperationScreen = new SelectOperationScreen(mainPanels, procedureDocData);
 
 		ArrayList<ArrayList<ProcedureScreen>> procedureScreen = new ArrayList<ArrayList<ProcedureScreen>>();
+		List<ConclusionScreen> conclusionScreen = new ArrayList<>();
 		for (int i = 0; i < 2; i++) {
 			procedureScreen.add(new ArrayList<ProcedureScreen>());
 			for (int j = 0; j < ProcedureList.PROCEDURE_LIST[i].length; j++) {
 				procedureScreen.get(i).add(new ProcedureScreen(mainPanels, procedureDocData, i, j));
 			}
+			conclusionScreen.add(new ConclusionScreen(mainPanels, procedureDocData, i));
 		}
 
-		// ProcedureScreen procedureScreen = new ProcedureScreen(contanier);
-		// initialScreen.showScreen();
-		// procedureScreen.showScreen();
 		prevnextButton.nextButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int canMove = 1;
@@ -46,6 +44,7 @@ class ElectronicProcedureDocument extends JFrame {
 					for (int j = 0; j < ProcedureList.PROCEDURE_LIST[i].length; j++) {
 						canMove *= procedureScreen.get(i).get(j).update(currentScreenName);
 					}
+					canMove *= conclusionScreen.get(i).update(currentScreenName);
 				}
 				if (canMove > 0) {
 					mainPanels.next();

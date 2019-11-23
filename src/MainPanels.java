@@ -12,14 +12,11 @@ class MainPanels {
     public List<String> screenNameList = new ArrayList<>();
     private int currentScreenNum = 0;
     // private int PROCEDURE_SCREEN_ONE_NUM = 3;
-    private int PROCEDURE_SCREEN_TWO_NUM = 7;
+    private int PROCEDURE_SCREEN_TWO_NUM = 8;
     private int SELECT_OPERATION_SCREEN = 2;
+    private int CONCLUSION_SCREEN_ONE_NUM = 7;
+    private int CONCLUSION_SCREEN_TWO_NUM = 16;
     private ProcedureDocData procedureDocData = new ProcedureDocData();
-    /*
-     * layout = new CardLayout(); cardPanel.setLayout(layout);
-     * 
-     * cardPanel.add(card1, "button");
-     */
 
     MainPanels(ProcedureDocData procedure_doc_data) {
         mainPanels.setLayout(layout);
@@ -36,10 +33,10 @@ class MainPanels {
     public void next() {
         if ((procedureDocData.data.get("operationNum") == 1) && (currentScreenNum == SELECT_OPERATION_SCREEN)) {
             currentScreenNum = PROCEDURE_SCREEN_TWO_NUM;
+        } else if ((currentScreenNum == CONCLUSION_SCREEN_ONE_NUM) || (currentScreenNum == CONCLUSION_SCREEN_TWO_NUM)) {
+            currentScreenNum = 0;
         } else if (mainPanelsSize - 1 > currentScreenNum) {
             currentScreenNum += 1;
-        } else {
-            currentScreenNum = 0;
         }
         System.out.printf("This screen is %s\n", screenNameList.get(currentScreenNum));
         layout.show(mainPanels, screenNameList.get(currentScreenNum));

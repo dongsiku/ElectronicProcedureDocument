@@ -6,7 +6,6 @@ import java.util.Map;
 class ProcedureDocData {
     public Map<String, Integer> data = new HashMap<>();
     public Map<String, Double> checklist = new HashMap<>();
-    // TODO: fix data and checklist to static
 
     ProcedureDocData() {
         data.put("operationNum", -1);
