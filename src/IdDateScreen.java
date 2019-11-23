@@ -31,14 +31,13 @@ public class IdDateScreen extends JFrame {
     public int update(String currentScreenName) {
         if (currentScreenName.equals(SCREEN_NAME)) {
 
-            if (id_num_str.equals("")) {
-                return 0;
-            }
             if (id_num_str.length() == 4) {
                 createOperationYMD();
                 procedureDocData.data.put("operatorID", Integer.parseInt(id_num_str));
                 procedureDocData.data.put("operationDate", operationYMD);
                 procedureDocData.print();
+            } else {
+                return 0;
             }
         }
         return 1; // ok
