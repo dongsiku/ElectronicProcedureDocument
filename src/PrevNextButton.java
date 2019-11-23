@@ -32,7 +32,7 @@ public class PrevNextButton extends JFrame {
 
         prevnextPanel.add(prevButton);
         prevnextPanel.add(nextButton);
-        prevnextPanel.setBackground(Color.ORANGE);
+        // prevnextPanel.setBackground(Color.ORANGE);
 
         screenContainer.add(prevnextPanel, BorderLayout.NORTH);
 
