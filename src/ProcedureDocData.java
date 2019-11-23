@@ -30,7 +30,7 @@ class ProcedureDocData {
      * public void put(String key, int value) { data.put(key, value); }
      */
 
-    private void initializeChecklist() {
+    public void initializeChecklist() {
         for (int i = 0; i < ProcedureList.PROCEDURE_LIST.length; i++) {
             for (int j = 0; j < ProcedureList.PROCEDURE_LIST[i].length; j++) {
                 for (int k = 0; k < ProcedureList.PROCEDURE_LIST[i][j].length; k++) {
