@@ -14,7 +14,7 @@ public class ProcedureScreen extends JFrame {
     private int operationNum = -1;
     private int procedurePanelNum;
     private int procedureListLength = 0;
-    private String value_str = "";
+    private String valueStr = "";
     private JLabel operationNameLabel = new JLabel();
     private JLabel subOperationNameLabel = new JLabel();
 
@@ -70,8 +70,7 @@ public class ProcedureScreen extends JFrame {
 
     private JPanel createProcedureCheckboxPanel() {
         procedureListLength = ProcedureList.PROCEDURE_LIST[operationNum][procedurePanelNum].length;
-        int columnNum = (int) Math.ceil(procedureListLength / 2.0) + 1;
-        JPanel procedureCheckboxPanel = new JPanel(new GridLayout(columnNum, 2));
+        JPanel procedureCheckboxPanel = new JPanel(new GridLayout(5, 2));
 
         procedureCheckboxPanel.add(operationNameLabel);
         procedureCheckboxPanel.add(subOperationNameLabel);
@@ -100,7 +99,7 @@ public class ProcedureScreen extends JFrame {
         JPanel procedureNameAndValuePanel = new JPanel(new GridLayout(2, 1));
         JLabel procedureNameLabel = new JLabel(ProcedureList.PROCEDURE_LIST[operationNum][procedurePanelNum][0]);
         procedureNameLabel.setHorizontalAlignment(JLabel.CENTER);
-        JLabel procedureValueLabel = new JLabel(value_str);
+        JLabel procedureValueLabel = new JLabel("Value: ");
         procedureValueLabel.setHorizontalAlignment(JLabel.CENTER);
         procedureNameAndValuePanel.add(procedureNameLabel);
         procedureNameAndValuePanel.add(procedureValueLabel);
@@ -130,42 +129,45 @@ public class ProcedureScreen extends JFrame {
             String tempValue = String.valueOf(i);
             numberButtons[i].addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    value_str += tempValue;
-                    procedureValueLabel.setText("Value: " + value_str);
-                    procedureDocData.checklist.put(ProcedureList.PROCEDURE_LIST[operationNum][procedurePanelNum][0],
-                            Double.parseDouble(value_str));
+                    valueStr += tempValue;
+                    procedureValueLabel.setText("Value: " + valueStr);
+                    updateChecklist();
                 }
             });
         }
         pointButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if (!value_str.contains(".")) {
-                    value_str += ".";
-                    procedureValueLabel.setText("Value: " + value_str);
-                    procedureDocData.checklist.put(ProcedureList.PROCEDURE_LIST[operationNum][procedurePanelNum][0],
-                            Double.parseDouble(value_str));
+                if (!valueStr.contains(".")) {
+                    valueStr += ".";
+                    procedureValueLabel.setText("Value: " + valueStr);
                 }
+                updateChecklist();
             }
         });
         deleteButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if (value_str.length() > 0) {
-                    value_str = value_str.substring(0, value_str.length() - 1);
-                    procedureValueLabel.setText("Value: " + value_str);
-                    if (value_str.length() > 0) {
-                        procedureDocData.checklist.put(ProcedureList.PROCEDURE_LIST[operationNum][procedurePanelNum][0],
-                                Double.parseDouble(value_str));
-                    } else {
-                        procedureDocData.checklist.put(ProcedureList.PROCEDURE_LIST[operationNum][procedurePanelNum][0],
-                                -1.0);
-                    }
+                if (valueStr.length() > 0) {
+                    valueStr = valueStr.substring(0, valueStr.length() - 1);
+                    procedureValueLabel.setText("Value: " + valueStr);
                 }
+                updateChecklist();
             }
         });
 
         procedureKeyboardPanel.add(keyboardPanel);
         return procedureKeyboardPanel;
 
+    }
+
+    private void updateChecklist() {
+        if (valueStr.equals(".")) {
+            procedureDocData.checklist.put(ProcedureList.PROCEDURE_LIST[operationNum][procedurePanelNum][0], 0.0);
+        } else if (valueStr.equals("")) {
+            procedureDocData.checklist.put(ProcedureList.PROCEDURE_LIST[operationNum][procedurePanelNum][0], -1.0);
+        } else {
+            procedureDocData.checklist.put(ProcedureList.PROCEDURE_LIST[operationNum][procedurePanelNum][0],
+                    Double.parseDouble(valueStr));
+        }
     }
 
 }
