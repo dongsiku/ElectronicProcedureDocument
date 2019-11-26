@@ -19,13 +19,16 @@ public class IdDateScreen extends JFrame {
     IdDateScreen(MainPanels main_panels, ProcedureDocData procedure_doc_data) {
         procedureDocData = procedure_doc_data;
 
-        JPanel IdDateScreenPanel = new JPanel(new GridLayout(3, 1));
+        JPanel IdDateScreenPanel = new JPanel(new GridLayout(2, 1));
+        JPanel IdDateScreenKeyboardPanel = new JPanel(new GridLayout(2, 1));
         IdDateScreenPanel.add(createDatePanel());
         IdDateScreenPanel.add(createIdPanel());
-        IdDateScreenPanel.add(createKeyboardPanel());
+
+        IdDateScreenKeyboardPanel.add(IdDateScreenPanel);
+        IdDateScreenKeyboardPanel.add(createKeyboardPanel());
 
         mainPanels = main_panels;
-        mainPanels.add(IdDateScreenPanel, "IdDateScreen");
+        mainPanels.add(IdDateScreenKeyboardPanel, "IdDateScreen");
     }
 
     public int update(String currentScreenName) {
