@@ -14,7 +14,7 @@ public class ConclusionScreen extends JFrame {
     private JLabel idLabel = new JLabel();
     private JLabel dateLabel = new JLabel();
     private JLabel operataionNameLabel = new JLabel();
-    private List<JLabel> conclusionLabel = new ArrayList<>();
+    private List<JLabel> conclusionLabelList = new ArrayList<>();
 
     ConclusionScreen(MainPanels main_panels, ProcedureDocData procedure_doc_data, int operation_num) {
         procedureDocData = procedure_doc_data;
@@ -62,12 +62,12 @@ public class ConclusionScreen extends JFrame {
                     if (procedureDocData.checklist.get(ProcedureList.PROCEDURE_LIST[operationNum][i][j]) > -1.0) {
                         buf.append(": ");
                         buf.append(procedureDocData.checklist.get(ProcedureList.PROCEDURE_LIST[operationNum][i][j]));
-                        conclusionLabel.get(k).setText(buf.toString());
+                        conclusionLabelList.get(k).setText(buf.toString());
                         k += 1;
                     }
                 } else {
                     if (procedureDocData.checklist.get(ProcedureList.PROCEDURE_LIST[operationNum][i][j]) > 0.0) {
-                        conclusionLabel.get(k).setText(buf.toString());
+                        conclusionLabelList.get(k).setText(buf.toString());
                         k += 1;
                     }
                 }
@@ -79,22 +79,24 @@ public class ConclusionScreen extends JFrame {
 
     private JPanel createConclusionScreenPanel() {
         JPanel conclusionScreenPanel = new JPanel();
+        conclusionScreenPanel.setLayout(new BorderLayout());
         JPanel idDateOperationNamePanel = new JPanel(new GridLayout(1, 3));
         idDateOperationNamePanel.add(idLabel);
         idDateOperationNamePanel.add(dateLabel);
         idDateOperationNamePanel.add(operataionNameLabel);
-        conclusionScreenPanel.add(idDateOperationNamePanel);
+        conclusionScreenPanel.add(idDateOperationNamePanel, BorderLayout.NORTH);
 
         JPanel conclusionPanel = new JPanel(new GridLayout(ProcedureList.PROCEDURE_LIST_NUM[operationNum], 1));
         int k = 0;
         for (int i = 0; i < ProcedureList.PROCEDURE_LIST[operationNum].length; i++) {
             for (int j = 0; j < ProcedureList.PROCEDURE_LIST[operationNum][i].length; j++) {
-                conclusionLabel.add(new JLabel());
-                conclusionPanel.add(conclusionLabel.get(k));
+                conclusionLabelList.add(new JLabel());
+                conclusionLabelList.get(k).setHorizontalAlignment(JLabel.CENTER);
+                conclusionPanel.add(conclusionLabelList.get(k));
                 k += 1;
             }
         }
-        conclusionScreenPanel.add(conclusionPanel);
+        conclusionScreenPanel.add(conclusionPanel, BorderLayout.CENTER);
         return conclusionScreenPanel;
     }
 
