@@ -15,6 +15,8 @@ public class ProcedureScreen extends JFrame {
     private int procedurePanelNum;
     private int procedureListLength = 0;
     private String value_str = "";
+    private JLabel operationNameLabel = new JLabel();
+    private JLabel subOperationNameLabel = new JLabel();
 
     private List<JCheckBox> procedureCheckbox = new ArrayList<>();
 
@@ -43,6 +45,23 @@ public class ProcedureScreen extends JFrame {
     }
 
     private JPanel createProcedureScreenPanel() {
+        if (operationNum == 0) {
+            operationNameLabel.setText("操作１");
+        } else {
+            operationNameLabel.setText("操作２");
+        }
+
+        if (ProcedureList.PROCEDURE_LIST_INFO[operationNum][procedurePanelNum][0] == 0) {
+            subOperationNameLabel.setText("操作前確認");
+        } else if (ProcedureList.PROCEDURE_LIST_INFO[operationNum][procedurePanelNum][0] == 1) {
+            subOperationNameLabel.setText("起動操作");
+        } else {
+            subOperationNameLabel.setText("操作後確認");
+        }
+
+        operationNameLabel.setHorizontalAlignment(JLabel.CENTER);
+        subOperationNameLabel.setHorizontalAlignment(JLabel.CENTER);
+
         if (ProcedureList.PROCEDURE_LIST_INFO[operationNum][procedurePanelNum][1] == 1) {
             return createProcedureKeyboardPanel();
         }
@@ -51,7 +70,11 @@ public class ProcedureScreen extends JFrame {
 
     private JPanel createProcedureCheckboxPanel() {
         procedureListLength = ProcedureList.PROCEDURE_LIST[operationNum][procedurePanelNum].length;
-        JPanel procedureCheckboxPanel = new JPanel(new GridLayout(procedureListLength, 1));
+        int columnNum = (int) Math.ceil(procedureListLength / 2.0) + 1;
+        JPanel procedureCheckboxPanel = new JPanel(new GridLayout(columnNum, 2));
+
+        procedureCheckboxPanel.add(operationNameLabel);
+        procedureCheckboxPanel.add(subOperationNameLabel);
         for (int i = 0; i < procedureListLength; i++) {
             procedureCheckbox.add(new JCheckBox(ProcedureList.PROCEDURE_LIST[operationNum][procedurePanelNum][i]));
             procedureCheckbox.get(i).setHorizontalAlignment(JLabel.CENTER);
@@ -70,12 +93,24 @@ public class ProcedureScreen extends JFrame {
     }
 
     private JPanel createProcedureKeyboardPanel() {
-        JPanel procedureKeyboardPanel = new JPanel(new GridLayout(2, 1));
+        JPanel operationNamePanel = new JPanel(new GridLayout(1, 2));
+        operationNamePanel.add(operationNameLabel);
+        operationNamePanel.add(subOperationNameLabel);
+
         JPanel procedureNameAndValuePanel = new JPanel(new GridLayout(2, 1));
+        JLabel procedureNameLabel = new JLabel(ProcedureList.PROCEDURE_LIST[operationNum][procedurePanelNum][0]);
+        procedureNameLabel.setHorizontalAlignment(JLabel.CENTER);
         JLabel procedureValueLabel = new JLabel(value_str);
-        procedureNameAndValuePanel.add(new JLabel(ProcedureList.PROCEDURE_LIST[operationNum][procedurePanelNum][0]));
+        procedureValueLabel.setHorizontalAlignment(JLabel.CENTER);
+        procedureNameAndValuePanel.add(procedureNameLabel);
         procedureNameAndValuePanel.add(procedureValueLabel);
-        procedureKeyboardPanel.add(procedureNameAndValuePanel);
+
+        JPanel operationNameAndProcedureNameAndValuePanel = new JPanel(new GridLayout(2, 1));
+        operationNameAndProcedureNameAndValuePanel.add(operationNamePanel);
+        operationNameAndProcedureNameAndValuePanel.add(procedureNameAndValuePanel);
+
+        JPanel procedureKeyboardPanel = new JPanel(new GridLayout(2, 1));
+        procedureKeyboardPanel.add(operationNameAndProcedureNameAndValuePanel);
         JPanel keyboardPanel = new JPanel(new GridLayout(4, 3));
         JButton numberButtons[] = new JButton[10];
         JButton deleteButton = new JButton("Delete");
