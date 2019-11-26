@@ -20,8 +20,10 @@ class ProcedureList {
                                         { "16. バルブXV3の開操作．", "17. バルブXV3の開を確認．" }, { "18. 装置Xからの製品の質量流量を記録．" },
                                         { "19. 装置Xの温度が制限以下であることを確認．" } } };
         public static final int PROCEDURE_LIST_INFO[][][] = { { { 0, 0 }, { 1, 0 }, { 2, 1 }, { 2, 1 } },
-                        { { 0, 0 }, { 1, 0 }, { 1, 1 }, { 1, 0 }, { 1, 1 }, { 1, 0 }, { 2, 1 }, { 2, 0 } } }; // step_num,
-                                                                                                              // is_double
+                        { { 0, 0 }, { 1, 0 }, { 1, 1 }, { 1, 0 }, { 1, 1 }, { 1, 0 }, { 2, 1 }, { 2, 0 } } };
+        // {step_num, has_keyboard}
+        // step_num: 0 = 操作前確認 1 = 起動操作 2 = 操作後確認
+
         public static final int PROCEDURE_LIST_NUM[] = { 14, 19 };
 }
 // 操作１
