@@ -151,10 +151,15 @@ public class ProcedureScreen extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if (value_str.length() > 0) {
                     value_str = value_str.substring(0, value_str.length() - 1);
+                    procedureValueLabel.setText("Value: " + value_str);
+                    if (value_str.length() > 0) {
+                        procedureDocData.checklist.put(ProcedureList.PROCEDURE_LIST[operationNum][procedurePanelNum][0],
+                                Double.parseDouble(value_str));
+                    } else {
+                        procedureDocData.checklist.put(ProcedureList.PROCEDURE_LIST[operationNum][procedurePanelNum][0],
+                                -1.0);
+                    }
                 }
-                procedureValueLabel.setText("Value: " + value_str);
-                procedureDocData.checklist.put(ProcedureList.PROCEDURE_LIST[operationNum][procedurePanelNum][0],
-                        Double.parseDouble(value_str));
             }
         });
 
