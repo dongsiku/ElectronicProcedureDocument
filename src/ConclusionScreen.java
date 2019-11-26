@@ -38,11 +38,13 @@ public class ConclusionScreen extends JFrame {
         idBuf.append("ID: ");
         idBuf.append(procedureDocData.data.get("operatorID"));
         idLabel.setText(idBuf.toString());
+        idLabel.setHorizontalAlignment(JLabel.CENTER);
 
         StringBuilder dateBuf = new StringBuilder();
         dateBuf.append("DATE: ");
         dateBuf.append(procedureDocData.data.get("operationDate"));
         dateLabel.setText(dateBuf.toString());
+        dateLabel.setHorizontalAlignment(JLabel.CENTER);
 
         StringBuilder operationNumBuf = new StringBuilder();
         operationNumBuf.append("operationNum: ");
@@ -52,6 +54,7 @@ public class ConclusionScreen extends JFrame {
             operationNumBuf.append("操作２");
         }
         operataionNameLabel.setText(operationNumBuf.toString());
+        operataionNameLabel.setHorizontalAlignment(JLabel.CENTER);
 
         int k = 0;
         for (int i = 0; i < ProcedureList.PROCEDURE_LIST[operationNum].length; i++) {
