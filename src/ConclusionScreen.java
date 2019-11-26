@@ -58,22 +58,19 @@ public class ConclusionScreen extends JFrame {
             for (int j = 0; j < ProcedureList.PROCEDURE_LIST[operationNum][i].length; j++) {
                 StringBuilder buf = new StringBuilder();
                 buf.append(ProcedureList.PROCEDURE_LIST[operationNum][i][j]);
-                buf.append(": ");
                 if (ProcedureList.PROCEDURE_LIST_INFO[operationNum][i][1] == 1) {
-                    if (procedureDocData.checklist.get(ProcedureList.PROCEDURE_LIST[operationNum][i][j]) < 0.0) {
-                        buf.append("NG");
-                    } else {
+                    if (procedureDocData.checklist.get(ProcedureList.PROCEDURE_LIST[operationNum][i][j]) > -1.0) {
+                        buf.append(": ");
                         buf.append(procedureDocData.checklist.get(ProcedureList.PROCEDURE_LIST[operationNum][i][j]));
+                        conclusionLabel.get(k).setText(buf.toString());
+                        k += 1;
                     }
                 } else {
                     if (procedureDocData.checklist.get(ProcedureList.PROCEDURE_LIST[operationNum][i][j]) > 0.0) {
-                        buf.append("OK");
-                    } else {
-                        buf.append("NG");
+                        conclusionLabel.get(k).setText(buf.toString());
+                        k += 1;
                     }
                 }
-                conclusionLabel.get(k).setText(buf.toString());
-                k += 1;
             }
         }
 
@@ -81,22 +78,23 @@ public class ConclusionScreen extends JFrame {
     }
 
     private JPanel createConclusionScreenPanel() {
-        int columnNum = (int) Math.ceil(ProcedureList.PROCEDURE_LIST_NUM[operationNum] / 2.0) + 1;
-        JPanel conclusionScreenPanel = new JPanel(new GridLayout(columnNum, 2));
-        JPanel idDatePanel = new JPanel(new GridLayout(2, 1));
-        idDatePanel.add(idLabel);
-        idDatePanel.add(dateLabel);
-        conclusionScreenPanel.add(idDatePanel);
-        conclusionScreenPanel.add(operataionNameLabel);
+        JPanel conclusionScreenPanel = new JPanel();
+        JPanel idDateOperationNamePanel = new JPanel(new GridLayout(1, 3));
+        idDateOperationNamePanel.add(idLabel);
+        idDateOperationNamePanel.add(dateLabel);
+        idDateOperationNamePanel.add(operataionNameLabel);
+        conclusionScreenPanel.add(idDateOperationNamePanel);
 
+        JPanel conclusionPanel = new JPanel(new GridLayout(ProcedureList.PROCEDURE_LIST_NUM[operationNum], 1));
         int k = 0;
         for (int i = 0; i < ProcedureList.PROCEDURE_LIST[operationNum].length; i++) {
             for (int j = 0; j < ProcedureList.PROCEDURE_LIST[operationNum][i].length; j++) {
                 conclusionLabel.add(new JLabel());
-                conclusionScreenPanel.add(conclusionLabel.get(k));
+                conclusionPanel.add(conclusionLabel.get(k));
                 k += 1;
             }
         }
+        conclusionScreenPanel.add(conclusionPanel);
         return conclusionScreenPanel;
     }
 
