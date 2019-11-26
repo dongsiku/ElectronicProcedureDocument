@@ -5,7 +5,6 @@ import java.awt.*;
 
 public class InitialScreen extends JFrame {
 
-    private JLabel startLabel;
     public MainPanels mainPanels;
 
     InitialScreen(MainPanels main_panels) {
@@ -13,12 +12,19 @@ public class InitialScreen extends JFrame {
         mainPanels.add(createInitialScreenPanel(), "InitialScreen");
     }
 
+    public int update(String currentScreenName) {
+        return 1; // ok
+    }
+
     private JPanel createInitialScreenPanel() {
         JPanel initialscreenPanel = new JPanel();
-        startLabel = new JLabel("電子化手順書");
+        initialscreenPanel.setLayout(new BorderLayout());
+
+        JLabel startLabel = new JLabel("電子化手順書");
         startLabel.setFont(new Font("Arial", Font.BOLD, 32));
-        startLabel.setSize(startLabel.getPreferredSize());
+        // startLabel.setSize(startLabel.getPreferredSize());
         startLabel.setHorizontalAlignment(JLabel.CENTER);
+        startLabel.setVerticalAlignment(JLabel.CENTER);
 
         initialscreenPanel.add(startLabel);
         return initialscreenPanel;

@@ -38,6 +38,7 @@ class ElectronicProcedureDocument extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				int canMove = 1;
 				String currentScreenName = mainPanels.currentScreenName();
+				canMove *= initialScreen.update(currentScreenName);
 				canMove *= idDateSreen.update(currentScreenName);
 				canMove *= selectOperationScreen.update(currentScreenName);
 				for (int i = 0; i < 2; i++) {
