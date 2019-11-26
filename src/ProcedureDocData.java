@@ -23,7 +23,9 @@ class ProcedureDocData {
 
     public void printChecklist() {
         for (String key : checklist.keySet()) {
-            System.out.println(key + ": " + checklist.get(key));
+            if (checklist.get(key) > -1) {
+                System.out.println(key + ": " + checklist.get(key));
+            }
         }
     }
     /*
