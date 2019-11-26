@@ -77,6 +77,7 @@ public class ProcedureScreen extends JFrame {
         for (int i = 0; i < procedureListLength; i++) {
             procedureCheckbox.add(new JCheckBox(ProcedureList.PROCEDURE_LIST[operationNum][procedurePanelNum][i]));
             procedureCheckbox.get(i).setHorizontalAlignment(JLabel.CENTER);
+            procedureCheckbox.get(i).setBorderPainted(true);
             procedureCheckboxPanel.add(procedureCheckbox.get(i));
         }
         for (int i = 0; i < procedureListLength; i++) {
