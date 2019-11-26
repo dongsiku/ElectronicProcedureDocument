@@ -81,8 +81,8 @@ public class ConclusionScreen extends JFrame {
     }
 
     private JPanel createConclusionScreenPanel() {
-        int columnNum = (int) Math.ceil(ProcedureList.PROCEDURE_LIST_NUM[operationNum] / 2.0);
-        JPanel conclusionScreenPanel = new JPanel(new GridLayout(columnNum + 1, 2));
+        int columnNum = (int) Math.ceil(ProcedureList.PROCEDURE_LIST_NUM[operationNum] / 2.0) + 1;
+        JPanel conclusionScreenPanel = new JPanel(new GridLayout(columnNum, 2));
         JPanel idDatePanel = new JPanel(new GridLayout(2, 1));
         idDatePanel.add(idLabel);
         idDatePanel.add(dateLabel);
