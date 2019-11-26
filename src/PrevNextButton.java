@@ -22,11 +22,11 @@ public class PrevNextButton extends JFrame {
         // prevButton.setBounds(button_x, button_y, 100, 50);
         // nextButton.setBounds(button_x, button_y, 100, 50);
         // prevnextPanel.setBounds(620, 600, 200, 50);
-        prevnextPanel.setLayout(new GridLayout(1, 2, 20, 20));
+        prevnextPanel.setLayout(new GridLayout(1, 2));
         prevButton = new JButton("Previous");
         nextButton = new JButton("Next");
 
-        Dimension prevnextButtonDimension = new Dimension(320, 80);
+        Dimension prevnextButtonDimension = new Dimension(320, 64);
         prevButton.setPreferredSize(prevnextButtonDimension);
         nextButton.setPreferredSize(prevnextButtonDimension);
 
