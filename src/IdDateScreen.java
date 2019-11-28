@@ -11,7 +11,6 @@ public class IdDateScreen extends JFrame {
     private String id_num_str = "";
     private ProcedureDocData procedureDocData;
     private int operationYear, operationMonth, operationDate;
-    private int operationYMD;
     private String SCREEN_NAME = "IdDateScreen";
 
     IdDateScreen(MainPanels main_panels, ProcedureDocData procedure_doc_data) {
@@ -32,9 +31,10 @@ public class IdDateScreen extends JFrame {
         if (currentScreenName.equals(SCREEN_NAME)) {
 
             if (id_num_str.length() == 4) {
-                createOperationYMD();
                 procedureDocData.data.put("operatorID", Integer.parseInt(id_num_str));
-                procedureDocData.data.put("operationDate", operationYMD);
+                procedureDocData.data.put("operationYear", operationYear);
+                procedureDocData.data.put("operationMonth", operationMonth);
+                procedureDocData.data.put("operationDate", operationDate);
                 procedureDocData.printData();
             } else {
                 return 0;
@@ -160,9 +160,5 @@ public class IdDateScreen extends JFrame {
 
         });
         return datePanel;
-    }
-
-    private void createOperationYMD() {
-        operationYMD = (operationYear % 100) * 10000 + operationMonth * 100 + operationDate;
     }
 }

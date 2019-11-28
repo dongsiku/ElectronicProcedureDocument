@@ -40,6 +40,10 @@ public class ConclusionScreen extends JFrame {
 
         StringBuilder dateBuf = new StringBuilder();
         dateBuf.append("日付: ");
+        dateBuf.append(procedureDocData.data.get("operationYear"));
+        dateBuf.append("/");
+        dateBuf.append(procedureDocData.data.get("operationMonth"));
+        dateBuf.append("/");
         dateBuf.append(procedureDocData.data.get("operationDate"));
         dateLabel.setText(dateBuf.toString());
         dateLabel.setHorizontalAlignment(JLabel.CENTER);
