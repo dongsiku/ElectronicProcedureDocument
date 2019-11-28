@@ -19,7 +19,6 @@ public class InitialScreen {
 
         JLabel startLabel = new JLabel("電子化手順書");
         startLabel.setFont(new Font("Arial", Font.BOLD, 32));
-        // startLabel.setSize(startLabel.getPreferredSize());
         startLabel.setHorizontalAlignment(JLabel.CENTER);
         startLabel.setVerticalAlignment(JLabel.CENTER);
 

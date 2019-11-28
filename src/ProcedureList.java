@@ -1,7 +1,6 @@
 package src;
 
 class ProcedureList {
-        // int operationNum, procedureStepNum;
         public static final String PROCEDURE_LIST[][][] = {
                         { { "1. ポンプAP1の不作動を確認．", "2. バルブAV1の閉を確認．", "3. バルブAV2の閉を確認．", "4. ヒータAH1の不作動を確認．" },
                                         { "5. ポンプAP1を起動．", "6. ポンプAP1の作動を確認．", "7. バルブAV1の開操作．", "8. バルブAV1の開を確認．",
