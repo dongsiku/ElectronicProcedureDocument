@@ -15,6 +15,10 @@ class Main {
 	private static void createElectronicProcedureDocument() {
 		JFrame frame = new JFrame("電子化手順書");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+		ImageIcon icon = new ImageIcon("icon/capital_e.png");
+		frame.setIconImage(icon.getImage());
+
 		Container container = frame.getContentPane();
 		container.setBackground(Color.white);
 
