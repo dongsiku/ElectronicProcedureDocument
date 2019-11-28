@@ -22,12 +22,12 @@ public class ProcedureScreen {
         operationNum = operation_num;
         procedurePanelNum = procedure_panel_num;
 
-        StringBuilder buf = new StringBuilder();
-        buf.append("ProcedureScreen");
-        buf.append(operation_num);
-        buf.append("_");
-        buf.append(procedure_panel_num);
-        SCREEN_NAME = buf.toString();
+        StringBuilder screenNameBuf = new StringBuilder();
+        screenNameBuf.append("ProcedureScreen");
+        screenNameBuf.append(operation_num);
+        screenNameBuf.append("_");
+        screenNameBuf.append(procedure_panel_num);
+        SCREEN_NAME = screenNameBuf.toString();
 
         main_panels.add(createProcedureScreenPanel(), SCREEN_NAME);
     }
@@ -40,11 +40,19 @@ public class ProcedureScreen {
     }
 
     private JPanel createProcedureScreenPanel() {
+        StringBuilder operationNameBuf = new StringBuilder();
+        operationNameBuf.append("操作");
         if (operationNum == 0) {
-            operationNameLabel.setText("操作１");
+            operationNameBuf.append("１");
         } else {
-            operationNameLabel.setText("操作２");
+            operationNameBuf.append("２");
         }
+        operationNameBuf.append(" (");
+        operationNameBuf.append(procedurePanelNum + 1);
+        operationNameBuf.append(" / ");
+        operationNameBuf.append(ProcedureList.PROCEDURE_LIST_INFO[operationNum].length);
+        operationNameBuf.append(")");
+        operationNameLabel.setText(operationNameBuf.toString());
 
         if (ProcedureList.PROCEDURE_LIST_INFO[operationNum][procedurePanelNum][0] == 0) {
             subOperationNameLabel.setText("操作前確認");
