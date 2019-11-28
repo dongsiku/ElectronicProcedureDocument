@@ -54,47 +54,39 @@ class Main {
 				}
 				if (canMove > 0) {
 					mainPanels.next();
-					currentScreenName = mainPanels.currentScreenName();
-					selectOperationScreen.reset();
+					prevnextCommon(mainPanels.currentScreenName(), selectOperationScreen, prevnextButton);
 				}
 
-				if (!currentScreenName.equals("InitialScreen")) {
-					prevnextButton.setPrevButtonDefaultText();
-				}
-
-				prevnextButton.setNextButtonDefaultText();
-				if (currentScreenName.equals("IdDateScreen") || currentScreenName.equals("SelectOperationScreen")) {
-					prevnextButton.nextButton.setText("");
-				} else if (currentScreenName.equals("ConclusionScreen0")
-						|| currentScreenName.equals("ConclusionScreen1")) {
-					prevnextButton.nextButton.setText("終了");
-					prevnextButton.prevButton.setText("< 初期画面へ");
-				} else if (currentScreenName.equals("ProcedureScreen0_3")
-						|| currentScreenName.equals("ProcedureScreen1_7")) {
-					prevnextButton.nextButton.setText("完了");
-				}
 			}
 		});
 		prevnextButton.prevButton.addActionListener(new ActionListener() {
-
 			public void actionPerformed(ActionEvent e) {
 				mainPanels.previous();
-				String currentScreenName = mainPanels.currentScreenName();
-				selectOperationScreen.reset();
-
-				prevnextButton.setPrevButtonDefaultText();
-				prevnextButton.setNextButtonDefaultText();
-				if (currentScreenName.equals("InitialScreen")) {
-					prevnextButton.prevButton.setText("");
-				} else if (currentScreenName.equals("SelectOperationScreen")) {
-					prevnextButton.nextButton.setText("");
-				}
+				prevnextCommon(mainPanels.currentScreenName(), selectOperationScreen, prevnextButton);
 			}
 		});
 		container.add(mainPanels.mainPanels);
 		frame.setLocation(200, 100);
 		frame.setSize(640, 480);
 		frame.setVisible(true);
+	}
+
+	private static void prevnextCommon(String currentScreenName, SelectOperationScreen selectOperationScreen,
+			PrevNextButton prevnextButton) {
+		selectOperationScreen.reset();
+
+		prevnextButton.setNextButtonDefaultText();
+		prevnextButton.setPrevButtonDefaultText();
+		if (currentScreenName.equals("IdDateScreen") || currentScreenName.equals("SelectOperationScreen")) {
+			prevnextButton.nextButton.setText("");
+		} else if (currentScreenName.equals("ConclusionScreen0") || currentScreenName.equals("ConclusionScreen1")) {
+			prevnextButton.nextButton.setText("終了");
+			prevnextButton.prevButton.setText("< 初期画面へ");
+		} else if (currentScreenName.equals("ProcedureScreen0_3") || currentScreenName.equals("ProcedureScreen1_7")) {
+			prevnextButton.nextButton.setText("完了");
+		} else if (currentScreenName.equals("InitialScreen")) {
+			prevnextButton.prevButton.setText("");
+		}
 	}
 
 }
