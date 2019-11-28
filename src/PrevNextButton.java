@@ -11,9 +11,10 @@ public class PrevNextButton {
 
     PrevNextButton(Container screen_contanier) {
         screenContainer = screen_contanier;
+        showPrevNextButton();
     }
 
-    public void showPrevNextButton() {
+    private void showPrevNextButton() {
         JPanel prevnextPanel = new JPanel(new GridLayout(1, 2));
 
         Dimension prevnextButtonDimension = new Dimension(320, 64);
@@ -24,7 +25,6 @@ public class PrevNextButton {
         prevnextPanel.add(nextButton);
 
         screenContainer.add(prevnextPanel, BorderLayout.NORTH);
-
     }
 
     public void setNextButtonDefaultText() {

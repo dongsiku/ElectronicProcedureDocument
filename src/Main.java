@@ -23,11 +23,10 @@ class Main {
 		container.setBackground(Color.white);
 
 		ProcedureDocData procedureDocData = new ProcedureDocData();
-		MainPanels mainPanels = new MainPanels(procedureDocData);
 
 		PrevNextButton prevnextButton = new PrevNextButton(container);
-		prevnextButton.showPrevNextButton();
 
+		MainPanels mainPanels = new MainPanels(procedureDocData);
 		InitialScreen initialScreen = new InitialScreen(mainPanels);
 		IdDateScreen idDateSreen = new IdDateScreen(mainPanels, procedureDocData, prevnextButton);
 		SelectOperationScreen selectOperationScreen = new SelectOperationScreen(mainPanels, procedureDocData,
