@@ -6,7 +6,7 @@ import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.List;
 
-class ElectronicProcedureDocument extends JFrame {
+class Main {
 
 	public static void main(String[] args) {
 		createElectronicProcedureDocument();
