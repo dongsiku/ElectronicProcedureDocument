@@ -81,8 +81,13 @@ public class ProcedureScreen {
             int this_box_num = i;
             procedureCheckbox.get(this_box_num).addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    procedureDocData.checklist
-                            .put(ProcedureList.PROCEDURE_LIST[operationNum][procedurePanelNum][this_box_num], 1.0);
+                    if (procedureCheckbox.get(this_box_num).isSelected()) {
+                        procedureDocData.checklist
+                                .put(ProcedureList.PROCEDURE_LIST[operationNum][procedurePanelNum][this_box_num], 1.0); // True
+                    } else {
+                        procedureDocData.checklist
+                                .put(ProcedureList.PROCEDURE_LIST[operationNum][procedurePanelNum][this_box_num], -1.0); // False
+                    }
                 }
             });
         }
