@@ -35,7 +35,7 @@ public class IdDateScreen extends JFrame {
                 createOperationYMD();
                 procedureDocData.data.put("operatorID", Integer.parseInt(id_num_str));
                 procedureDocData.data.put("operationDate", operationYMD);
-                procedureDocData.print();
+                procedureDocData.printData();
             } else {
                 return 0;
             }
