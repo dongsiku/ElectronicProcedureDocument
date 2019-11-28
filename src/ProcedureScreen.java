@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.awt.event.*;
 
-public class ProcedureScreen extends JFrame {
+public class ProcedureScreen {
 
     private ProcedureDocData procedureDocData;
     private String SCREEN_NAME;

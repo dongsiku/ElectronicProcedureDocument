@@ -3,7 +3,7 @@ package src;
 import javax.swing.*;
 import java.awt.*;
 
-public class PrevNextButton extends JFrame {
+public class PrevNextButton {
 
     Container screenContainer;
     public JButton prevButton, nextButton;

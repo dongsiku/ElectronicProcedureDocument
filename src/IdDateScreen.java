@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.Calendar;
 
-public class IdDateScreen extends JFrame {
+public class IdDateScreen {
 
     private JLabel idLabel = new JLabel();
     private String id_num_str = "";

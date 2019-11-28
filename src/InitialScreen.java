@@ -3,7 +3,7 @@ package src;
 import javax.swing.*;
 import java.awt.*;
 
-public class InitialScreen extends JFrame {
+public class InitialScreen {
 
     InitialScreen(MainPanels main_panels) {
         main_panels.add(createInitialScreenPanel(), "InitialScreen");

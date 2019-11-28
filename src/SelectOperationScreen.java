@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class SelectOperationScreen extends JFrame {
+public class SelectOperationScreen {
 
     private ProcedureDocData procedureDocData;
     private String SCREEN_NAME = "SelectOperationScreen";

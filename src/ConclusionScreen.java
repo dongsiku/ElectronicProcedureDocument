@@ -5,7 +5,7 @@ import java.awt.*;
 import java.util.List;
 import java.util.ArrayList;
 
-public class ConclusionScreen extends JFrame {
+public class ConclusionScreen {
 
     private ProcedureDocData procedureDocData;
     private String SCREEN_NAME;
