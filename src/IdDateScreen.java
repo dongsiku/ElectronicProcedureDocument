@@ -8,7 +8,7 @@ import java.util.Calendar;
 public class IdDateScreen {
 
     private JLabel idLabel = new JLabel();
-    private String id_num_str = "";
+    private String idNumStr = "";
     private ProcedureDocData procedureDocData;
     private int operationYear, operationMonth, operationDate;
     private String SCREEN_NAME = "IdDateScreen";
@@ -30,8 +30,8 @@ public class IdDateScreen {
     public int update(String currentScreenName) {
         if (currentScreenName.equals(SCREEN_NAME)) {
 
-            if (id_num_str.length() == 4) {
-                procedureDocData.data.put("operatorID", Integer.parseInt(id_num_str));
+            if (idNumStr.length() == 4) {
+                procedureDocData.data.put("operatorID", Integer.parseInt(idNumStr));
                 procedureDocData.data.put("operationYear", operationYear);
                 procedureDocData.data.put("operationMonth", operationMonth);
                 procedureDocData.data.put("operationDate", operationDate);
@@ -69,8 +69,8 @@ public class IdDateScreen {
             String tempNum = String.valueOf(i);
             numberButtons[i].addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    if (id_num_str.length() < 4) {
-                        id_num_str += tempNum;
+                    if (idNumStr.length() < 4) {
+                        idNumStr += tempNum;
                     }
                     setIdLabel();
                 }
@@ -79,8 +79,8 @@ public class IdDateScreen {
         deleteButton.addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent e) {
-                if (id_num_str.length() > 0) {
-                    id_num_str = id_num_str.substring(0, id_num_str.length() - 1);
+                if (idNumStr.length() > 0) {
+                    idNumStr = idNumStr.substring(0, idNumStr.length() - 1);
                 }
                 setIdLabel();
             }
@@ -94,7 +94,7 @@ public class IdDateScreen {
     private void setIdLabel() {
         StringBuilder idBuf = new StringBuilder();
         idBuf.append("操作者ID: ");
-        idBuf.append(id_num_str);
+        idBuf.append(idNumStr);
         idLabel.setText(idBuf.toString());
     }
 

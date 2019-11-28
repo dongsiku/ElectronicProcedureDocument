@@ -19,10 +19,10 @@ public class ConclusionScreen {
         procedureDocData = procedure_doc_data;
         operationNum = operation_num;
 
-        StringBuilder buf = new StringBuilder();
-        buf.append("ConclusionScreen");
-        buf.append(operation_num);
-        SCREEN_NAME = buf.toString();
+        StringBuilder screenNameBuf = new StringBuilder();
+        screenNameBuf.append("ConclusionScreen");
+        screenNameBuf.append(operation_num);
+        SCREEN_NAME = screenNameBuf.toString();
 
         main_panels.add(createConclusionScreenPanel(), SCREEN_NAME);
     }
@@ -61,18 +61,19 @@ public class ConclusionScreen {
         int k = 1;
         for (int i = 0; i < ProcedureList.PROCEDURE_LIST[operationNum].length; i++) {
             for (int j = 0; j < ProcedureList.PROCEDURE_LIST[operationNum][i].length; j++) {
-                StringBuilder buf = new StringBuilder();
-                buf.append(ProcedureList.PROCEDURE_LIST[operationNum][i][j]);
+                StringBuilder conclusionLabelBuf = new StringBuilder();
+                conclusionLabelBuf.append(ProcedureList.PROCEDURE_LIST[operationNum][i][j]);
                 if (ProcedureList.PROCEDURE_LIST_INFO[operationNum][i][1] == 1) {
                     if (procedureDocData.checklist.get(ProcedureList.PROCEDURE_LIST[operationNum][i][j]) > -1.0) {
-                        buf.append(": ");
-                        buf.append(procedureDocData.checklist.get(ProcedureList.PROCEDURE_LIST[operationNum][i][j]));
-                        conclusionLabelList.get(k).setText(buf.toString());
+                        conclusionLabelBuf.append(": ");
+                        conclusionLabelBuf.append(
+                                procedureDocData.checklist.get(ProcedureList.PROCEDURE_LIST[operationNum][i][j]));
+                        conclusionLabelList.get(k).setText(conclusionLabelBuf.toString());
                         k += 1;
                     }
                 } else {
                     if (procedureDocData.checklist.get(ProcedureList.PROCEDURE_LIST[operationNum][i][j]) > 0.0) {
-                        conclusionLabelList.get(k).setText(buf.toString());
+                        conclusionLabelList.get(k).setText(conclusionLabelBuf.toString());
                         k += 1;
                     }
                 }

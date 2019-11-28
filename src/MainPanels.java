@@ -26,7 +26,6 @@ class MainPanels {
         mainPanels.add(mainPanel, screenName);
         screenNameList.add(screenName);
         mainPanelsSize += 1;
-        System.out.printf("mainPanelsSize is %d\n", mainPanelsSize);
     }
 
     public void next() {

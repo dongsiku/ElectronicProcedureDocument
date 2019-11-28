@@ -12,11 +12,9 @@ public class ProcedureScreen {
     private String SCREEN_NAME;
     private int operationNum = -1;
     private int procedurePanelNum;
-    private int procedureListLength = 0;
     private String valueStr = "";
     private JLabel operationNameLabel = new JLabel();
     private JLabel subOperationNameLabel = new JLabel();
-    private List<JCheckBox> procedureCheckbox = new ArrayList<>();
 
     ProcedureScreen(MainPanels main_panels, ProcedureDocData procedure_doc_data, int operation_num,
             int procedure_panel_num) {
@@ -66,8 +64,9 @@ public class ProcedureScreen {
     }
 
     private JPanel createProcedureCheckboxPanel() {
-        procedureListLength = ProcedureList.PROCEDURE_LIST[operationNum][procedurePanelNum].length;
+        int procedureListLength = ProcedureList.PROCEDURE_LIST[operationNum][procedurePanelNum].length;
         JPanel procedureCheckboxPanel = new JPanel(new GridLayout(5, 2));
+        List<JCheckBox> procedureCheckbox = new ArrayList<>();
 
         procedureCheckboxPanel.add(operationNameLabel);
         procedureCheckboxPanel.add(subOperationNameLabel);

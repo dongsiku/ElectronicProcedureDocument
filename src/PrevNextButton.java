@@ -6,17 +6,15 @@ import java.awt.*;
 public class PrevNextButton {
 
     Container screenContainer;
-    public JButton prevButton, nextButton;
-    private JPanel prevnextPanel;
+    public JButton prevButton = new JButton("< 前へ");
+    public JButton nextButton = new JButton("次へ >");
 
     PrevNextButton(Container screen_contanier) {
         screenContainer = screen_contanier;
     }
 
     public void showPrevNextButton() {
-        prevnextPanel = new JPanel(new GridLayout(1, 2));
-        prevButton = new JButton("< 前へ");
-        nextButton = new JButton("次へ >");
+        JPanel prevnextPanel = new JPanel(new GridLayout(1, 2));
 
         Dimension prevnextButtonDimension = new Dimension(320, 64);
         prevButton.setPreferredSize(prevnextButtonDimension);
