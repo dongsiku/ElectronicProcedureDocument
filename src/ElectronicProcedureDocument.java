@@ -9,7 +9,11 @@ import java.util.List;
 class ElectronicProcedureDocument extends JFrame {
 
 	public static void main(String[] args) {
-		JFrame frame = new JFrame("Electronic Procedure Document");
+		createElectronicProcedureDocument();
+	}
+
+	private static void createElectronicProcedureDocument() {
+		JFrame frame = new JFrame("電子化手順書");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Container container = frame.getContentPane();
 		container.setBackground(Color.white);
