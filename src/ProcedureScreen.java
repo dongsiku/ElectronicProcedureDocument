@@ -77,6 +77,15 @@ public class ProcedureScreen {
             procedureCheckbox.get(i).setBorderPainted(true);
             procedureCheckboxPanel.add(procedureCheckbox.get(i));
         }
+
+        // Add blank labels to fix design when (procedureListLength + 2) < 6
+        // 2 means the number of operationNameLabel and subOperationNameLabel
+        int blankLabelNum = 4 - procedureListLength;
+        while (blankLabelNum > 0) {
+            procedureCheckboxPanel.add(new JLabel());
+            blankLabelNum -= 1;
+        }
+
         for (int i = 0; i < procedureListLength; i++) {
             int this_box_num = i;
             procedureCheckbox.get(this_box_num).addActionListener(new ActionListener() {
