@@ -12,9 +12,11 @@ public class IdDateScreen {
     private ProcedureDocData procedureDocData;
     private int operationYear, operationMonth, operationDate;
     private String SCREEN_NAME = "IdDateScreen";
+    private PrevNextButton prevNextButton;
 
-    IdDateScreen(MainPanels main_panels, ProcedureDocData procedure_doc_data) {
+    IdDateScreen(MainPanels main_panels, ProcedureDocData procedure_doc_data, PrevNextButton prev_next_button) {
         procedureDocData = procedure_doc_data;
+        prevNextButton = prev_next_button;
 
         JPanel IdDateScreenPanel = new JPanel(new GridLayout(2, 1));
         JPanel IdDateScreenKeyboardPanel = new JPanel(new GridLayout(2, 1));
@@ -29,7 +31,6 @@ public class IdDateScreen {
 
     public int update(String currentScreenName) {
         if (currentScreenName.equals(SCREEN_NAME)) {
-
             if (idNumStr.length() == 4) {
                 procedureDocData.data.put("operatorID", Integer.parseInt(idNumStr));
                 procedureDocData.data.put("operationYear", operationYear);
@@ -73,6 +74,11 @@ public class IdDateScreen {
                         idNumStr += tempNum;
                     }
                     setIdLabel();
+                    if (idNumStr.length() == 4) {
+                        prevNextButton.setNextButtonDefaultText();
+                    } else {
+                        prevNextButton.nextButton.setText("");
+                    }
                 }
             });
         }
@@ -83,6 +89,7 @@ public class IdDateScreen {
                     idNumStr = idNumStr.substring(0, idNumStr.length() - 1);
                 }
                 setIdLabel();
+                prevNextButton.nextButton.setText("");
             }
 
         });

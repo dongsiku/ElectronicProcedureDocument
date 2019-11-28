@@ -25,8 +25,9 @@ class Main {
 		prevnextButton.showPrevNextButton();
 
 		InitialScreen initialScreen = new InitialScreen(mainPanels);
-		IdDateScreen idDateSreen = new IdDateScreen(mainPanels, procedureDocData);
-		SelectOperationScreen selectOperationScreen = new SelectOperationScreen(mainPanels, procedureDocData);
+		IdDateScreen idDateSreen = new IdDateScreen(mainPanels, procedureDocData, prevnextButton);
+		SelectOperationScreen selectOperationScreen = new SelectOperationScreen(mainPanels, procedureDocData,
+				prevnextButton);
 
 		ArrayList<ArrayList<ProcedureScreen>> procedureScreen = new ArrayList<ArrayList<ProcedureScreen>>();
 		List<ConclusionScreen> conclusionScreen = new ArrayList<>();
@@ -53,12 +54,29 @@ class Main {
 				}
 				if (canMove > 0) {
 					mainPanels.next();
+					currentScreenName = mainPanels.currentScreenName();
+				}
+				if (currentScreenName.equals("IdDateScreen") || currentScreenName.equals("SelectOperationScreen")) {
+					prevnextButton.nextButton.setText("");
+				} else if (currentScreenName.equals("ConclusionScreen0")
+						|| currentScreenName.equals("ConclusionScreen1")) {
+					prevnextButton.nextButton.setText("完了");
+				} else {
+					prevnextButton.setNextButtonDefaultText();
+				}
+				if (!currentScreenName.equals("InitialScreen")) {
+					prevnextButton.setPrevButtonDefaultText();
 				}
 			}
 		});
 		prevnextButton.prevButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				mainPanels.previous();
+				if (mainPanels.currentScreenName().equals("InitialScreen")) {
+					prevnextButton.prevButton.setText("");
+				} else {
+					prevnextButton.setPrevButtonDefaultText();
+				}
 			}
 		});
 		container.add(mainPanels.mainPanels);

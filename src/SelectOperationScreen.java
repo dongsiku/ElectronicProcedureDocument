@@ -9,10 +9,13 @@ public class SelectOperationScreen {
     private ProcedureDocData procedureDocData;
     private String SCREEN_NAME = "SelectOperationScreen";
     private JCheckBox[] operationCheckbox = { new JCheckBox("操作１"), new JCheckBox("操作２") };
-    private int operation_num = -1;
+    private int operationNum = -1;
+    private PrevNextButton prevNextButton;
 
-    SelectOperationScreen(MainPanels main_panels, ProcedureDocData procedure_doc_data) {
+    SelectOperationScreen(MainPanels main_panels, ProcedureDocData procedure_doc_data,
+            PrevNextButton prev_next_button) {
         procedureDocData = procedure_doc_data;
+        prevNextButton = prev_next_button;
 
         JPanel SelectOperationScreenPanel = createSelectOperationScreenPanel();
         listenOperationCheckbox();
@@ -22,10 +25,10 @@ public class SelectOperationScreen {
 
     public int update(String currentScreenName) {
         if (currentScreenName.equals(SCREEN_NAME)) {
-            if (operation_num < 0) {
+            if (operationNum < 0) {
                 return 0; // NG
             }
-            procedureDocData.data.put("operationNum", operation_num);
+            procedureDocData.data.put("operationNum", operationNum);
             procedureDocData.printData();
         }
         return 1; // ok
@@ -52,8 +55,14 @@ public class SelectOperationScreen {
             int another_box_num = 1 - i;
             operationCheckbox[this_box_num].addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    operationCheckbox[another_box_num].setSelected(false);
-                    operation_num = this_box_num;
+                    if (operationCheckbox[this_box_num].isSelected()) {
+                        operationCheckbox[another_box_num].setSelected(false);
+                        operationNum = this_box_num;
+                        prevNextButton.setNextButtonDefaultText();
+                    } else {
+                        operationNum = -1;
+                        prevNextButton.nextButton.setText("");
+                    }
                 }
             });
         }

@@ -6,8 +6,8 @@ import java.awt.*;
 public class PrevNextButton {
 
     Container screenContainer;
-    public JButton prevButton = new JButton("< 前へ");
-    public JButton nextButton = new JButton("次へ >");
+    public JButton prevButton = new JButton("");
+    public JButton nextButton = new JButton("");
 
     PrevNextButton(Container screen_contanier) {
         screenContainer = screen_contanier;
@@ -25,5 +25,13 @@ public class PrevNextButton {
 
         screenContainer.add(prevnextPanel, BorderLayout.NORTH);
 
+    }
+
+    public void setNextButtonDefaultText() {
+        nextButton.setText("次へ >");
+    }
+
+    public void setPrevButtonDefaultText() {
+        prevButton.setText("< 前へ");
     }
 }
