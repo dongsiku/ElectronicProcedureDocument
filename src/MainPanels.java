@@ -32,7 +32,7 @@ class MainPanels {
         if ((procedureDocData.data.get("operationNum") == 1) && (currentScreenNum == SELECT_OPERATION_SCREEN)) {
             currentScreenNum = PROCEDURE_SCREEN_TWO_NUM;
         } else if ((currentScreenNum == CONCLUSION_SCREEN_ONE_NUM) || (currentScreenNum == CONCLUSION_SCREEN_TWO_NUM)) {
-            currentScreenNum = 0;
+            System.exit(0);
         } else if (mainPanelsSize - 1 > currentScreenNum) {
             currentScreenNum += 1;
         }
@@ -43,6 +43,8 @@ class MainPanels {
     public void previous() {
         if (currentScreenNum == PROCEDURE_SCREEN_TWO_NUM) {
             currentScreenNum = SELECT_OPERATION_SCREEN;
+        } else if ((currentScreenNum == CONCLUSION_SCREEN_ONE_NUM) || (currentScreenNum == CONCLUSION_SCREEN_TWO_NUM)) {
+            currentScreenNum = 0;
         } else if (currentScreenNum > 0) {
             currentScreenNum -= 1;
         }

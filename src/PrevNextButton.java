@@ -7,7 +7,7 @@ public class PrevNextButton {
 
     Container screenContainer;
     public JButton prevButton = new JButton("");
-    public JButton nextButton = new JButton("");
+    public JButton nextButton = new JButton("次へ >");
 
     PrevNextButton(Container screen_contanier) {
         screenContainer = screen_contanier;

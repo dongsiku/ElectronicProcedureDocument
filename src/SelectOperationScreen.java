@@ -67,4 +67,11 @@ public class SelectOperationScreen {
             });
         }
     }
+
+    public void reset() {
+        operationNum = -1;
+        for (int i = 0; i < 2; i++) {
+            operationCheckbox[i].setSelected(false);
+        }
+    }
 }
