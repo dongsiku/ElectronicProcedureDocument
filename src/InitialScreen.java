@@ -5,14 +5,11 @@ import java.awt.*;
 
 public class InitialScreen extends JFrame {
 
-    public MainPanels mainPanels;
-
     InitialScreen(MainPanels main_panels) {
-        mainPanels = main_panels;
-        mainPanels.add(createInitialScreenPanel(), "InitialScreen");
+        main_panels.add(createInitialScreenPanel(), "InitialScreen");
     }
 
-    public int update(String currentScreenName) {
+    public int update() {
         return 1; // ok
     }
 

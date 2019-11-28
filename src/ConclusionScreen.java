@@ -7,8 +7,7 @@ import java.util.ArrayList;
 
 public class ConclusionScreen extends JFrame {
 
-    public MainPanels mainPanels;
-    public ProcedureDocData procedureDocData;
+    private ProcedureDocData procedureDocData;
     private String SCREEN_NAME;
     private int operationNum = -1;
     private JLabel idLabel = new JLabel();
@@ -25,8 +24,7 @@ public class ConclusionScreen extends JFrame {
         buf.append(operation_num);
         SCREEN_NAME = buf.toString();
 
-        mainPanels = main_panels;
-        mainPanels.add(createConclusionScreenPanel(), SCREEN_NAME);
+        main_panels.add(createConclusionScreenPanel(), SCREEN_NAME);
     }
 
     public int update(String currentScreenName) {

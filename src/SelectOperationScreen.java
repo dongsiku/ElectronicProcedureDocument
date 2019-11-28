@@ -6,8 +6,7 @@ import java.awt.event.*;
 
 public class SelectOperationScreen extends JFrame {
 
-    public MainPanels mainPanels;
-    public ProcedureDocData procedureDocData;
+    private ProcedureDocData procedureDocData;
     private String SCREEN_NAME = "SelectOperationScreen";
     private JCheckBox[] operationCheckbox = { new JCheckBox("操作１"), new JCheckBox("操作２") };
     private int operation_num = -1;
@@ -18,8 +17,7 @@ public class SelectOperationScreen extends JFrame {
         JPanel SelectOperationScreenPanel = createSelectOperationScreenPanel();
         listenOperationCheckbox();
 
-        mainPanels = main_panels;
-        mainPanels.add(SelectOperationScreenPanel, SCREEN_NAME);
+        main_panels.add(SelectOperationScreenPanel, SCREEN_NAME);
     }
 
     public int update(String currentScreenName) {

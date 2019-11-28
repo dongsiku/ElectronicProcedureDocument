@@ -7,11 +7,10 @@ import java.util.List;
 
 class MainPanels {
     public JPanel mainPanels = new JPanel();
-    public CardLayout layout = new CardLayout();
-    public int mainPanelsSize = 0;
-    public List<String> screenNameList = new ArrayList<>();
+    private CardLayout layout = new CardLayout();
+    private int mainPanelsSize = 0;
+    private List<String> screenNameList = new ArrayList<>();
     private int currentScreenNum = 0;
-    // private int PROCEDURE_SCREEN_ONE_NUM = 3;
     private int PROCEDURE_SCREEN_TWO_NUM = 8;
     private int SELECT_OPERATION_SCREEN = 2;
     private int CONCLUSION_SCREEN_ONE_NUM = 7;

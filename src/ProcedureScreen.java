@@ -8,8 +8,7 @@ import java.awt.event.*;
 
 public class ProcedureScreen extends JFrame {
 
-    public MainPanels mainPanels;
-    public ProcedureDocData procedureDocData;
+    private ProcedureDocData procedureDocData;
     private String SCREEN_NAME;
     private int operationNum = -1;
     private int procedurePanelNum;
@@ -17,7 +16,6 @@ public class ProcedureScreen extends JFrame {
     private String valueStr = "";
     private JLabel operationNameLabel = new JLabel();
     private JLabel subOperationNameLabel = new JLabel();
-
     private List<JCheckBox> procedureCheckbox = new ArrayList<>();
 
     ProcedureScreen(MainPanels main_panels, ProcedureDocData procedure_doc_data, int operation_num,
@@ -33,8 +31,7 @@ public class ProcedureScreen extends JFrame {
         buf.append(procedure_panel_num);
         SCREEN_NAME = buf.toString();
 
-        mainPanels = main_panels;
-        mainPanels.add(createProcedureScreenPanel(), SCREEN_NAME);
+        main_panels.add(createProcedureScreenPanel(), SCREEN_NAME);
     }
 
     public int update(String currentScreenName) {

@@ -7,11 +7,9 @@ import java.util.Calendar;
 
 public class IdDateScreen extends JFrame {
 
-    public MainPanels mainPanels;
-
     private JLabel idLabel = new JLabel("ID: ");;
     private String id_num_str = "";
-    public ProcedureDocData procedureDocData;
+    private ProcedureDocData procedureDocData;
     private int operationYear, operationMonth, operationDate;
     private int operationYMD;
     private String SCREEN_NAME = "IdDateScreen";
@@ -27,8 +25,7 @@ public class IdDateScreen extends JFrame {
         IdDateScreenKeyboardPanel.add(IdDateScreenPanel);
         IdDateScreenKeyboardPanel.add(createKeyboardPanel());
 
-        mainPanels = main_panels;
-        mainPanels.add(IdDateScreenKeyboardPanel, "IdDateScreen");
+        main_panels.add(IdDateScreenKeyboardPanel, "IdDateScreen");
     }
 
     public int update(String currentScreenName) {
