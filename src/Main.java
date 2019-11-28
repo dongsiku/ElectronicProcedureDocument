@@ -58,7 +58,7 @@ class Main {
 				}
 				if (canMove > 0) {
 					mainPanels.next();
-					prevnextCommon(mainPanels.currentScreenName(), selectOperationScreen, prevnextButton);
+					prevnextCommon(mainPanels.currentScreenName(), prevnextButton);
 				}
 
 			}
@@ -66,7 +66,7 @@ class Main {
 		prevnextButton.prevButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				mainPanels.previous();
-				prevnextCommon(mainPanels.currentScreenName(), selectOperationScreen, prevnextButton);
+				prevnextCommon(mainPanels.currentScreenName(), prevnextButton);
 			}
 		});
 		container.add(mainPanels.mainPanels);
@@ -75,10 +75,7 @@ class Main {
 		frame.setVisible(true);
 	}
 
-	private static void prevnextCommon(String currentScreenName, SelectOperationScreen selectOperationScreen,
-			PrevNextButton prevnextButton) {
-		selectOperationScreen.reset();
-
+	private static void prevnextCommon(String currentScreenName, PrevNextButton prevnextButton) {
 		prevnextButton.setNextButtonDefaultText();
 		prevnextButton.setPrevButtonDefaultText();
 		if (currentScreenName.equals("IdDateScreen") || currentScreenName.equals("SelectOperationScreen")) {

@@ -30,6 +30,7 @@ public class SelectOperationScreen {
             }
             procedureDocData.data.put("operationNum", operationNum);
             procedureDocData.printData();
+            resetCheckbox();
         }
         return 1; // ok
     }
@@ -68,7 +69,7 @@ public class SelectOperationScreen {
         }
     }
 
-    public void reset() {
+    private void resetCheckbox() {
         operationNum = -1;
         for (int i = 0; i < 2; i++) {
             operationCheckbox[i].setSelected(false);
