@@ -33,19 +33,19 @@ public class ConclusionScreen extends JFrame {
             procedureDocData.initializeChecklist();
         }
         StringBuilder idBuf = new StringBuilder();
-        idBuf.append("ID: ");
+        idBuf.append("操作者ID: ");
         idBuf.append(procedureDocData.data.get("operatorID"));
         idLabel.setText(idBuf.toString());
         idLabel.setHorizontalAlignment(JLabel.CENTER);
 
         StringBuilder dateBuf = new StringBuilder();
-        dateBuf.append("DATE: ");
+        dateBuf.append("日付: ");
         dateBuf.append(procedureDocData.data.get("operationDate"));
         dateLabel.setText(dateBuf.toString());
         dateLabel.setHorizontalAlignment(JLabel.CENTER);
 
         StringBuilder operationNumBuf = new StringBuilder();
-        operationNumBuf.append("operationNum: ");
+        operationNumBuf.append("実施操作名: ");
         if (procedureDocData.data.get("operationNum") == 0) {
             operationNumBuf.append("操作１");
         } else {
@@ -54,7 +54,7 @@ public class ConclusionScreen extends JFrame {
         operataionNameLabel.setText(operationNumBuf.toString());
         operataionNameLabel.setHorizontalAlignment(JLabel.CENTER);
 
-        int k = 0;
+        int k = 1;
         for (int i = 0; i < ProcedureList.PROCEDURE_LIST[operationNum].length; i++) {
             for (int j = 0; j < ProcedureList.PROCEDURE_LIST[operationNum][i].length; j++) {
                 StringBuilder buf = new StringBuilder();
@@ -87,8 +87,12 @@ public class ConclusionScreen extends JFrame {
         idDateOperationNamePanel.add(operataionNameLabel);
         conclusionScreenPanel.add(idDateOperationNamePanel, BorderLayout.NORTH);
 
-        JPanel conclusionPanel = new JPanel(new GridLayout(ProcedureList.PROCEDURE_LIST_NUM[operationNum], 1));
-        int k = 0;
+        JPanel conclusionPanel = new JPanel(new GridLayout(ProcedureList.PROCEDURE_LIST_NUM[operationNum] + 1, 1));
+        conclusionLabelList.add(new JLabel("< 実行した操作 >"));
+        conclusionLabelList.get(0).setHorizontalAlignment(JLabel.CENTER);
+        conclusionPanel.add(conclusionLabelList.get(0));
+
+        int k = 1;
         for (int i = 0; i < ProcedureList.PROCEDURE_LIST[operationNum].length; i++) {
             for (int j = 0; j < ProcedureList.PROCEDURE_LIST[operationNum][i].length; j++) {
                 conclusionLabelList.add(new JLabel());

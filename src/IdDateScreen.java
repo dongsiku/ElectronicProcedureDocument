@@ -7,7 +7,7 @@ import java.util.Calendar;
 
 public class IdDateScreen extends JFrame {
 
-    private JLabel idLabel = new JLabel("ID: ");;
+    private JLabel idLabel = new JLabel();
     private String id_num_str = "";
     private ProcedureDocData procedureDocData;
     private int operationYear, operationMonth, operationDate;
@@ -45,6 +45,7 @@ public class IdDateScreen extends JFrame {
 
     private JPanel createIdPanel() {
         JPanel idPanel = new JPanel(new FlowLayout());
+        setIdLabel();
         idPanel.add(idLabel);
         return idPanel;
     }
@@ -71,7 +72,7 @@ public class IdDateScreen extends JFrame {
                     if (id_num_str.length() < 4) {
                         id_num_str += tempNum;
                     }
-                    idLabel.setText("ID: " + id_num_str);
+                    setIdLabel();
                 }
             });
         }
@@ -81,13 +82,20 @@ public class IdDateScreen extends JFrame {
                 if (id_num_str.length() > 0) {
                     id_num_str = id_num_str.substring(0, id_num_str.length() - 1);
                 }
-                idLabel.setText("ID: " + id_num_str);
+                setIdLabel();
             }
 
         });
 
         return keyboardPanel;
 
+    }
+
+    private void setIdLabel() {
+        StringBuilder idBuf = new StringBuilder();
+        idBuf.append("操作者ID: ");
+        idBuf.append(id_num_str);
+        idLabel.setText(idBuf.toString());
     }
 
     private JPanel createDatePanel() {
@@ -126,7 +134,7 @@ public class IdDateScreen extends JFrame {
         combo_month.setPreferredSize(dimension_combo);
         combo_date.setPreferredSize(dimension_combo);
 
-        datePanel.add(new JLabel("Date: "));
+        datePanel.add(new JLabel("日付: "));
         datePanel.add(combo_year);
         datePanel.add(combo_month);
         datePanel.add(combo_date);

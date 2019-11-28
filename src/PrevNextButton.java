@@ -15,8 +15,8 @@ public class PrevNextButton extends JFrame {
 
     public void showPrevNextButton() {
         prevnextPanel = new JPanel(new GridLayout(1, 2));
-        prevButton = new JButton("Previous");
-        nextButton = new JButton("Next");
+        prevButton = new JButton("< 前へ");
+        nextButton = new JButton("次へ >");
 
         Dimension prevnextButtonDimension = new Dimension(320, 64);
         prevButton.setPreferredSize(prevnextButtonDimension);
