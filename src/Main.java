@@ -87,7 +87,7 @@ class Main {
 		} else if (currentScreenName.equals("ProcedureScreen0_3") || currentScreenName.equals("ProcedureScreen1_7")) {
 			prevnextButton.nextButton.setText("完了");
 		} else if (currentScreenName.equals("InitialScreen")) {
-			prevnextButton.prevButton.setText("");
+			prevnextButton.setInitialText();
 		}
 	}
 }

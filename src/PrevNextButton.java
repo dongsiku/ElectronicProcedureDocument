@@ -6,11 +6,12 @@ import java.awt.*;
 public class PrevNextButton {
 
     private Container screenContainer;
-    public JButton prevButton = new JButton("");
-    public JButton nextButton = new JButton("次へ >");
+    public JButton prevButton = new JButton();
+    public JButton nextButton = new JButton();
 
     PrevNextButton(Container screen_contanier) {
         screenContainer = screen_contanier;
+        setInitialText();
         showPrevNextButton();
     }
 
@@ -24,6 +25,11 @@ public class PrevNextButton {
         prevnextPanel.add(nextButton);
 
         screenContainer.add(prevnextPanel, BorderLayout.NORTH);
+    }
+
+    public void setInitialText() {
+        nextButton.setText("開始 >");
+        prevButton.setText("");
     }
 
     public void setNextButtonDefaultText() {
