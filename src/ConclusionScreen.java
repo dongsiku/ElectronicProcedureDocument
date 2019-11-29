@@ -79,23 +79,21 @@ public class ConclusionScreen {
                 }
             }
         }
-
         return 1; // ok
     }
 
     private JPanel createConclusionScreenPanel() {
-        JPanel conclusionScreenPanel = new JPanel();
-        conclusionScreenPanel.setLayout(new BorderLayout());
+
         JPanel idDateOperationNamePanel = new JPanel(new GridLayout(1, 3));
         idDateOperationNamePanel.add(idLabel);
         idDateOperationNamePanel.add(dateLabel);
         idDateOperationNamePanel.add(operataionNameLabel);
-        conclusionScreenPanel.add(idDateOperationNamePanel, BorderLayout.NORTH);
 
         JPanel conclusionPanel = new JPanel(new GridLayout(ProcedureList.PROCEDURE_LIST_NUM[operationNum] + 1, 1));
         conclusionLabelList.add(new JLabel("< 実行した操作 >"));
         conclusionLabelList.get(0).setHorizontalAlignment(JLabel.CENTER);
         conclusionPanel.add(conclusionLabelList.get(0));
+        // TODO: remove notation from conclusionLabelList
 
         int k = 1;
         for (int i = 0; i < ProcedureList.PROCEDURE_LIST[operationNum].length; i++) {
@@ -106,6 +104,10 @@ public class ConclusionScreen {
                 k += 1;
             }
         }
+
+        JPanel conclusionScreenPanel = new JPanel();
+        conclusionScreenPanel.setLayout(new BorderLayout());
+        conclusionScreenPanel.add(idDateOperationNamePanel, BorderLayout.NORTH);
         conclusionScreenPanel.add(conclusionPanel, BorderLayout.CENTER);
         return conclusionScreenPanel;
     }

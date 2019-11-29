@@ -14,16 +14,14 @@ public class InitialScreen {
     }
 
     private JPanel createInitialScreenPanel() {
-        JPanel initialscreenPanel = new JPanel();
-        initialscreenPanel.setLayout(new BorderLayout());
-
         JLabel startLabel = new JLabel("電子化手順書");
         startLabel.setFont(new Font("Arial", Font.BOLD, 32));
         startLabel.setHorizontalAlignment(JLabel.CENTER);
         startLabel.setVerticalAlignment(JLabel.CENTER);
 
+        JPanel initialscreenPanel = new JPanel();
+        initialscreenPanel.setLayout(new BorderLayout());
         initialscreenPanel.add(startLabel);
         return initialscreenPanel;
     }
-
 }

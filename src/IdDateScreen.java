@@ -19,10 +19,10 @@ public class IdDateScreen {
         prevNextButton = prev_next_button;
 
         JPanel IdDateScreenPanel = new JPanel(new GridLayout(2, 1));
-        JPanel IdDateScreenKeyboardPanel = new JPanel(new GridLayout(2, 1));
         IdDateScreenPanel.add(createDatePanel());
         IdDateScreenPanel.add(createIdPanel());
 
+        JPanel IdDateScreenKeyboardPanel = new JPanel(new GridLayout(2, 1));
         IdDateScreenKeyboardPanel.add(IdDateScreenPanel);
         IdDateScreenKeyboardPanel.add(createKeyboardPanel());
 
@@ -95,7 +95,6 @@ public class IdDateScreen {
         });
 
         return keyboardPanel;
-
     }
 
     private void setIdLabel() {
@@ -145,26 +144,21 @@ public class IdDateScreen {
         datePanel.add(combo_year);
         datePanel.add(combo_month);
         datePanel.add(combo_date);
-        combo_year.addActionListener(new ActionListener() {
 
+        combo_year.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 operationYear = combo_year.getSelectedIndex() + initYear - prevYear;
             }
-
         });
         combo_month.addActionListener(new ActionListener() {
-
             public void actionPerformed(ActionEvent e) {
                 operationMonth = combo_month.getSelectedIndex() + 1;
             }
-
         });
         combo_date.addActionListener(new ActionListener() {
-
             public void actionPerformed(ActionEvent e) {
                 operationDate = combo_date.getSelectedIndex();
             }
-
         });
         return datePanel;
     }

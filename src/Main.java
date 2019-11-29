@@ -68,6 +68,7 @@ class Main {
 				prevnextCommon(mainPanels.currentScreenName(), prevnextButton);
 			}
 		});
+
 		container.add(mainPanels.mainPanels);
 		frame.setLocation(200, 100);
 		frame.setSize(640, 480);
@@ -88,5 +89,4 @@ class Main {
 			prevnextButton.prevButton.setText("");
 		}
 	}
-
 }

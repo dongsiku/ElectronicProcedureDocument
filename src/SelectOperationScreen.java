@@ -36,16 +36,18 @@ public class SelectOperationScreen {
     }
 
     private JPanel createSelectOperationScreenPanel() {
-        JPanel selectOperationScreenPanel = new JPanel(new GridLayout(2, 1));
-        JPanel selectOperationPanel = new JPanel(new GridLayout(1, 2));
         JLabel notationLabel = new JLabel("実施操作名");
         notationLabel.setHorizontalAlignment(JLabel.CENTER);
-        selectOperationScreenPanel.add(notationLabel);
+
+        JPanel selectOperationPanel = new JPanel(new GridLayout(1, 2));
         for (int i = 0; i < 2; i++) {
             operationCheckbox[i].setHorizontalAlignment(JLabel.CENTER);
             operationCheckbox[i].setBorderPainted(true);
             selectOperationPanel.add(operationCheckbox[i]);
         }
+
+        JPanel selectOperationScreenPanel = new JPanel(new GridLayout(2, 1));
+        selectOperationScreenPanel.add(notationLabel);
         selectOperationScreenPanel.add(selectOperationPanel);
         return selectOperationScreenPanel;
     }

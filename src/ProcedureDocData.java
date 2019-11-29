@@ -12,9 +12,6 @@ class ProcedureDocData {
         initializeChecklist();
     }
 
-    /*
-     * operatorID, operationDate, operationName
-     */
     public void printData() {
         for (String key : data.keySet()) {
             System.out.println(key + ": " + data.get(key));
@@ -38,5 +35,4 @@ class ProcedureDocData {
             }
         }
     }
-
 }

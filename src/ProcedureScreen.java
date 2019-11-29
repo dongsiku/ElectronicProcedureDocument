@@ -72,12 +72,12 @@ public class ProcedureScreen {
     }
 
     private JPanel createProcedureCheckboxPanel() {
-        int procedureListLength = ProcedureList.PROCEDURE_LIST[operationNum][procedurePanelNum].length;
         JPanel procedureCheckboxPanel = new JPanel(new GridLayout(5, 2));
-        List<JCheckBox> procedureCheckbox = new ArrayList<>();
-
         procedureCheckboxPanel.add(operationNameLabel);
         procedureCheckboxPanel.add(subOperationNameLabel);
+
+        int procedureListLength = ProcedureList.PROCEDURE_LIST[operationNum][procedurePanelNum].length;
+        List<JCheckBox> procedureCheckbox = new ArrayList<>();
         for (int i = 0; i < procedureListLength; i++) {
             procedureCheckbox.add(new JCheckBox(ProcedureList.PROCEDURE_LIST[operationNum][procedurePanelNum][i]));
             procedureCheckbox.get(i).setHorizontalAlignment(JLabel.CENTER);
@@ -115,11 +115,12 @@ public class ProcedureScreen {
         operationNamePanel.add(operationNameLabel);
         operationNamePanel.add(subOperationNameLabel);
 
-        JPanel procedureNameAndValuePanel = new JPanel(new GridLayout(2, 1));
         JLabel procedureNameLabel = new JLabel(ProcedureList.PROCEDURE_LIST[operationNum][procedurePanelNum][0]);
         procedureNameLabel.setHorizontalAlignment(JLabel.CENTER);
         JLabel procedureValueLabel = new JLabel("Value: ");
         procedureValueLabel.setHorizontalAlignment(JLabel.CENTER);
+
+        JPanel procedureNameAndValuePanel = new JPanel(new GridLayout(2, 1));
         procedureNameAndValuePanel.add(procedureNameLabel);
         procedureNameAndValuePanel.add(procedureValueLabel);
 
@@ -129,14 +130,15 @@ public class ProcedureScreen {
 
         JPanel procedureKeyboardPanel = new JPanel(new GridLayout(2, 1));
         procedureKeyboardPanel.add(operationNameAndProcedureNameAndValuePanel);
-        JPanel keyboardPanel = new JPanel(new GridLayout(4, 3));
+
         JButton numberButtons[] = new JButton[10];
-        JButton deleteButton = new JButton("Delete");
-        JButton pointButton = new JButton(".");
         for (int i = 0; i < 10; i++) {
             numberButtons[i] = new JButton(String.valueOf(i));
         }
+        JButton pointButton = new JButton(".");
+        JButton deleteButton = new JButton("Delete");
 
+        JPanel keyboardPanel = new JPanel(new GridLayout(4, 3));
         for (int i = 1; i < 10; i++) {
             keyboardPanel.add(numberButtons[i]);
         }
@@ -175,7 +177,6 @@ public class ProcedureScreen {
 
         procedureKeyboardPanel.add(keyboardPanel);
         return procedureKeyboardPanel;
-
     }
 
     private void updateChecklist() {
@@ -188,5 +189,4 @@ public class ProcedureScreen {
                     Double.parseDouble(valueStr));
         }
     }
-
 }
