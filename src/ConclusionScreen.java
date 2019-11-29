@@ -58,7 +58,7 @@ public class ConclusionScreen {
         operataionNameLabel.setText(operationNumBuf.toString());
         operataionNameLabel.setHorizontalAlignment(JLabel.CENTER);
 
-        int k = 1;
+        int k = 0;
         for (int i = 0; i < ProcedureList.PROCEDURE_LIST[operationNum].length; i++) {
             for (int j = 0; j < ProcedureList.PROCEDURE_LIST[operationNum][i].length; j++) {
                 StringBuilder conclusionLabelBuf = new StringBuilder();
@@ -83,19 +83,17 @@ public class ConclusionScreen {
     }
 
     private JPanel createConclusionScreenPanel() {
-
         JPanel idDateOperationNamePanel = new JPanel(new GridLayout(1, 3));
         idDateOperationNamePanel.add(idLabel);
         idDateOperationNamePanel.add(dateLabel);
         idDateOperationNamePanel.add(operataionNameLabel);
 
-        JPanel conclusionPanel = new JPanel(new GridLayout(ProcedureList.PROCEDURE_LIST_NUM[operationNum] + 1, 1));
-        conclusionLabelList.add(new JLabel("< 実行した操作 >"));
-        conclusionLabelList.get(0).setHorizontalAlignment(JLabel.CENTER);
-        conclusionPanel.add(conclusionLabelList.get(0));
-        // TODO: remove notation from conclusionLabelList
+        JLabel conclusionNotationLabel = new JLabel("< 実行した操作 >");
+        conclusionNotationLabel.setHorizontalAlignment(JLabel.CENTER);
 
-        int k = 1;
+        JPanel conclusionPanel = new JPanel(new GridLayout(ProcedureList.PROCEDURE_LIST_NUM[operationNum] + 1, 1));
+        conclusionPanel.add(conclusionNotationLabel);
+        int k = 0;
         for (int i = 0; i < ProcedureList.PROCEDURE_LIST[operationNum].length; i++) {
             for (int j = 0; j < ProcedureList.PROCEDURE_LIST[operationNum][i].length; j++) {
                 conclusionLabelList.add(new JLabel());
