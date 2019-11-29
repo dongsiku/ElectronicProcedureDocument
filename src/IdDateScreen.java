@@ -8,7 +8,7 @@ import java.util.Calendar;
 public class IdDateScreen {
 
     private JLabel idLabel = new JLabel();
-    private String idNumStr = "";
+    public String idNumStr = "";
     private ProcedureDocData procedureDocData;
     private int operationYear, operationMonth, operationDate;
     private String SCREEN_NAME = "IdDateScreen";
@@ -83,7 +83,6 @@ public class IdDateScreen {
             });
         }
         deleteButton.addActionListener(new ActionListener() {
-
             public void actionPerformed(ActionEvent e) {
                 if (idNumStr.length() > 0) {
                     idNumStr = idNumStr.substring(0, idNumStr.length() - 1);
@@ -91,7 +90,6 @@ public class IdDateScreen {
                 setIdLabel();
                 prevNextButton.nextButton.setText("");
             }
-
         });
 
         return keyboardPanel;

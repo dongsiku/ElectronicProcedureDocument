@@ -57,7 +57,7 @@ class Main {
 				}
 				if (canMove > 0) {
 					mainPanels.next();
-					prevnextCommon(mainPanels.currentScreenName(), prevnextButton);
+					prevnextCommon(mainPanels.currentScreenName(), prevnextButton, idDateSreen.idNumStr);
 				}
 
 			}
@@ -65,7 +65,7 @@ class Main {
 		prevnextButton.prevButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				mainPanels.previous();
-				prevnextCommon(mainPanels.currentScreenName(), prevnextButton);
+				prevnextCommon(mainPanels.currentScreenName(), prevnextButton, idDateSreen.idNumStr);
 			}
 		});
 
@@ -75,10 +75,11 @@ class Main {
 		frame.setVisible(true);
 	}
 
-	private static void prevnextCommon(String currentScreenName, PrevNextButton prevnextButton) {
+	private static void prevnextCommon(String currentScreenName, PrevNextButton prevnextButton, String idNumStr) {
 		prevnextButton.setNextButtonDefaultText();
 		prevnextButton.setPrevButtonDefaultText();
-		if (currentScreenName.equals("IdDateScreen") || currentScreenName.equals("SelectOperationScreen")) {
+		if ((currentScreenName.equals("SelectOperationScreen"))
+				|| (currentScreenName.equals("IdDateScreen") && idNumStr.length() < 4)) {
 			prevnextButton.nextButton.setText("");
 		} else if (currentScreenName.equals("ConclusionScreen0") || currentScreenName.equals("ConclusionScreen1")) {
 			prevnextButton.nextButton.setText("終了");
