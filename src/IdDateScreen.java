@@ -3,11 +3,15 @@ package src;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+// タブレット端末の日付を取得するために，
+// java.util.Calendarをインポートする．
 import java.util.Calendar;
 
 public class IdDateScreen {
 
     private JLabel idLabel = new JLabel();
+    // 入力された操作者IDを一時的に補完する変数である．
+    // 0から始まる操作者IDを考慮し，String型を用いた．
     public String idNumStr = "";
     private ProcedureDocData procedureDocData;
     private int operationYear, operationMonth, operationDate;
@@ -26,18 +30,22 @@ public class IdDateScreen {
         IdDateScreenKeyboardPanel.add(IdDateScreenPanel);
         IdDateScreenKeyboardPanel.add(createKeyboardPanel());
 
-        main_panels.add(IdDateScreenKeyboardPanel, "IdDateScreen");
+        main_panels.add(IdDateScreenKeyboardPanel, SCREEN_NAME);
     }
 
     public int update(String currentScreenName) {
         if (currentScreenName.equals(SCREEN_NAME)) {
             if (idNumStr.length() == 4) {
+                // 4桁の操作者IDが入力されたとき，操作者IDと日付をdataに追加する．
+                // なお，Mapo型において，既に登録されているキーについて追加が行われた場合，
+                // 値が更新される．
                 procedureDocData.data.put("operatorID", Integer.parseInt(idNumStr));
                 procedureDocData.data.put("operationYear", operationYear);
                 procedureDocData.data.put("operationMonth", operationMonth);
                 procedureDocData.data.put("operationDate", operationDate);
                 procedureDocData.printData();
             } else {
+                // 操作者IDが4桁でないときは，次の画面への遷移を禁止する．
                 return 0;
             }
         }
@@ -51,6 +59,7 @@ public class IdDateScreen {
         return idPanel;
     }
 
+    // 操作者IDを入力するためのソフトキーボードを生成する．
     private JPanel createKeyboardPanel() {
         JPanel keyboardPanel = new JPanel(new GridLayout(4, 3));
         JButton numberButtons[] = new JButton[10];
@@ -71,12 +80,18 @@ public class IdDateScreen {
             numberButtons[i].addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     if (idNumStr.length() < 4) {
+                        // 入力された操作者IDが4桁以下であるとき，
+                        // クリックされた数字をidNumStrに追加する．
                         idNumStr += tempNum;
                     }
                     setIdLabel();
                     if (idNumStr.length() == 4) {
+                        // 入力された操作者IDが4桁になった時，
+                        // 「次へ >」ボタンに標準のテキストを表示する．
                         prevNextButton.setNextButtonStandardText();
                     } else {
+                        // 入力された操作者IDが4桁になってない時，
+                        // 「次へ >」ボタンのテキストを削除する．
                         prevNextButton.nextButton.setText("");
                     }
                 }
@@ -85,9 +100,11 @@ public class IdDateScreen {
         deleteButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (idNumStr.length() > 0) {
+                    // 入力された操作者IDが1桁以上であるとき，一番最後の文字を削除する．
                     idNumStr = idNumStr.substring(0, idNumStr.length() - 1);
                 }
                 setIdLabel();
+                // 操作者IDが必ず4桁以下になるため，「次へ >」ボタンのテキストを削除する．
                 prevNextButton.nextButton.setText("");
             }
         });
@@ -95,6 +112,7 @@ public class IdDateScreen {
         return keyboardPanel;
     }
 
+    // 変数idNumStrを画面に表示するため，idLabelを設定する．
     private void setIdLabel() {
         StringBuilder idBuf = new StringBuilder();
         idBuf.append("操作者ID: ");
@@ -102,18 +120,30 @@ public class IdDateScreen {
         idLabel.setText(idBuf.toString());
     }
 
+    // 日付を入力するためのパネルを生成する．
     private JPanel createDatePanel() {
         JPanel datePanel = new JPanel(new FlowLayout());
+
+        // タブレット端末の日付を取得する．
         Calendar cal = Calendar.getInstance();
-        String[] combodata_year = new String[10];
+        // 取得した日付を初期値とする．
+        final int INIT_YEAR = cal.get(Calendar.YEAR);
+        final int INIT_MONTH = cal.get(Calendar.MONTH);
+        final int INIT_DATE = cal.get(Calendar.DATE);
+
+        // コンボボックスに表示する年について，
+        // 何年分の範囲の指定を可能にするか指定する．
+        // 例えば，タブレット端末から取得した年が2019年ならば，
+        // (2019 - BEFORE_AFTER_YEAR)年から
+        // (2019 + BEFORE_AFTER_YEAR)年までがコンボボックスに表示される．
+        final int BEFORE_AFTER_YEAR = 5;
+
+        // コンボボックスを生成する．
+        String[] combodata_year = new String[BEFORE_AFTER_YEAR * 2 + 1];
         String[] combodata_month = new String[12];
         String[] combodata_date = new String[31];
-        int prevYear = 5;
-        int initYear = cal.get(Calendar.YEAR);
-        int initMonth = cal.get(Calendar.MONTH);
-        int initDate = cal.get(Calendar.DATE);
-        for (int i = 0; i < 10; i++) {
-            combodata_year[i] = String.valueOf(i + initYear - prevYear);
+        for (int i = 0; i < BEFORE_AFTER_YEAR * 2 + 1; i++) {
+            combodata_year[i] = String.valueOf(i + INIT_YEAR - BEFORE_AFTER_YEAR);
         }
         for (int i = 0; i < 12; i++) {
             combodata_month[i] = String.valueOf(i + 1);
@@ -124,16 +154,18 @@ public class IdDateScreen {
         JComboBox<String> combo_year = new JComboBox<>(combodata_year);
         JComboBox<String> combo_month = new JComboBox<>(combodata_month);
         JComboBox<String> combo_date = new JComboBox<>(combodata_date);
+
+        // タブレット端末から取得した日付をコンボボックスの初期値とする．
+        combo_year.setSelectedIndex(BEFORE_AFTER_YEAR);
+        combo_month.setSelectedIndex(INIT_MONTH);
+        combo_date.setSelectedIndex(INIT_DATE - 1);
+
+        // コンボボックスの初期値を操作した日付として代入する．
+        operationYear = INIT_YEAR;
+        operationMonth = INIT_MONTH + 1;
+        operationDate = INIT_DATE;
+
         Dimension dimension_combo = new Dimension(80, 30);
-
-        combo_year.setSelectedIndex(prevYear);
-        combo_month.setSelectedIndex(initMonth);
-        combo_date.setSelectedIndex(initDate - 1);
-
-        operationYear = initYear;
-        operationMonth = initMonth + 1;
-        operationDate = initDate;
-
         combo_year.setPreferredSize(dimension_combo);
         combo_month.setPreferredSize(dimension_combo);
         combo_date.setPreferredSize(dimension_combo);
@@ -143,9 +175,11 @@ public class IdDateScreen {
         datePanel.add(combo_month);
         datePanel.add(combo_date);
 
+        // コンボボックスにアクションが発生した場合，
+        // それぞれのコンボボックスに対応する日付（年，月，日）を更新する．
         combo_year.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                operationYear = combo_year.getSelectedIndex() + initYear - prevYear;
+                operationYear = combo_year.getSelectedIndex() + INIT_YEAR - BEFORE_AFTER_YEAR;
             }
         });
         combo_month.addActionListener(new ActionListener() {

@@ -14,6 +14,7 @@ public class PrevNextButton {
         setInitialText();
     }
 
+    // 画面遷移のためのボタンを設定する．
     private void setPrevNextButtonPanel() {
         Dimension prevnextButtonDimension = new Dimension(320, 64);
         prevButton.setPreferredSize(prevnextButtonDimension);
@@ -23,15 +24,18 @@ public class PrevNextButton {
         prevnextButtonPanel.add(nextButton);
     }
 
+    // 初期画面でのそれぞれのボタンのテキストを設定する．
     public void setInitialText() {
         nextButton.setText("開始 >");
         prevButton.setText("");
     }
 
+    // 「次へ >」ボタンを標準のテキストである「次へ >」に設定する．
     public void setNextButtonStandardText() {
         nextButton.setText("次へ >");
     }
 
+    // 「< 前へ」ボタンを標準のテキストである「< 前へ」に設定する．
     public void setPrevButtonStandardText() {
         prevButton.setText("< 前へ");
     }

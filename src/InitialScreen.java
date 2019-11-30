@@ -6,10 +6,12 @@ import java.awt.*;
 public class InitialScreen {
 
     InitialScreen(MainPanels main_panels) {
+        // 初期画面をInitialScreenという名前で登録する．
         main_panels.add(createInitialScreenPanel(), "InitialScreen");
     }
 
     public int update() {
+        // 特に確認することはないため，常時1（真）を返す
         return 1; // ok
     }
 

@@ -10,10 +10,13 @@ public class ProcedureScreen {
 
     private ProcedureDocData procedureDocData;
     private String SCREEN_NAME;
-    private int operationNum = -1;
+    private int operationNum;
     private int procedurePanelNum;
+    // ソフトキーボードの画面にて入力された値をvalueStrに代入する．
+    // 初期状態では，何も入力されていないため，空文字列が代入されている．
     private String valueStr = "";
     private JLabel operationNameLabel = new JLabel();
+    // subOperationNameは操作段階名を示す．
     private JLabel subOperationNameLabel = new JLabel();
 
     ProcedureScreen(MainPanels main_panels, ProcedureDocData procedure_doc_data, int operation_num,
@@ -22,6 +25,8 @@ public class ProcedureScreen {
         operationNum = operation_num;
         procedurePanelNum = procedure_panel_num;
 
+        // 操作手順の画面は，operation_numやprocedure_panel_numを変更することにより，
+        // 複数個生成されるため，それぞれの画面の名前を生成する．
         StringBuilder screenNameBuf = new StringBuilder();
         screenNameBuf.append("ProcedureScreen");
         screenNameBuf.append(operation_num);
@@ -34,12 +39,14 @@ public class ProcedureScreen {
 
     public int update(String currentScreenName) {
         if (currentScreenName.equals(SCREEN_NAME)) {
+            // 現在表示されている画面がこの画面のとき，checklistを標準出力で出力する．
             procedureDocData.printChecklist();
         }
         return 1; // ok
     }
 
     private JPanel createProcedureScreenPanel() {
+        // 実施操作名を生成する
         StringBuilder operationNameBuf = new StringBuilder();
         operationNameBuf.append("操作");
         if (operationNum == 0) {
@@ -54,6 +61,7 @@ public class ProcedureScreen {
         operationNameBuf.append(")");
         operationNameLabel.setText(operationNameBuf.toString());
 
+        // 操作段階名を生成する．
         if (ProcedureList.PROCEDURE_LIST_INFO[operationNum][procedurePanelNum][0] == 0) {
             subOperationNameLabel.setText("操作前確認");
         } else if (ProcedureList.PROCEDURE_LIST_INFO[operationNum][procedurePanelNum][0] == 1) {
@@ -66,11 +74,15 @@ public class ProcedureScreen {
         subOperationNameLabel.setHorizontalAlignment(JLabel.CENTER);
 
         if (ProcedureList.PROCEDURE_LIST_INFO[operationNum][procedurePanelNum][1] == 1) {
+            // PROCEDURE_LIST_INFOを参照し，この操作手順が記録を行う手順である場合は，
+            // ソフトキーボードの画面を生成する．
             return createProcedureKeyboardPanel();
         }
+        // これ以外の場合は，チェックボックスの画面を生成する．
         return createProcedureCheckboxPanel();
     }
 
+    // チェックボックスの画面を生成するメゾットである．
     private JPanel createProcedureCheckboxPanel() {
         JPanel procedureCheckboxPanel = new JPanel(new GridLayout(5, 2));
         procedureCheckboxPanel.add(operationNameLabel);
@@ -85,6 +97,9 @@ public class ProcedureScreen {
             procedureCheckboxPanel.add(procedureCheckbox.get(i));
         }
 
+        // パネルに追加するラベルやチェックボックスの数が
+        // GridLayoutの行数より小さい場合，パネルのデザインが崩れてしまうため，
+        // 空文字列のラベルを追加する．
         // Add blank labels to fix design when (procedureListLength + 2) < 6
         // 2 means the number of operationNameLabel and subOperationNameLabel
         int blankLabelNum = 4 - procedureListLength;
@@ -96,6 +111,11 @@ public class ProcedureScreen {
         for (int i = 0; i < procedureListLength; i++) {
             int this_box_num = i;
             procedureCheckbox.get(this_box_num).addActionListener(new ActionListener() {
+                // チェックボックスにイベントが発生した際，
+                // チェックされた手順について，checklistの値を1.0に更新する．
+                // これは，操作手順が実行されたことを意味する．
+                // また，チェックされていない手順について，checklistの値を-1.0に更新するが，
+                // これは，操作手順が実行されなかったことを意味する．
                 public void actionPerformed(ActionEvent e) {
                     if (procedureCheckbox.get(this_box_num).isSelected()) {
                         procedureDocData.checklist
@@ -110,6 +130,7 @@ public class ProcedureScreen {
         return procedureCheckboxPanel;
     }
 
+    // ソフトキーボードの画面を生成するメゾットである．
     private JPanel createProcedureKeyboardPanel() {
         JPanel operationNamePanel = new JPanel(new GridLayout(1, 2));
         operationNamePanel.add(operationNameLabel);
@@ -117,7 +138,7 @@ public class ProcedureScreen {
 
         JLabel procedureNameLabel = new JLabel(ProcedureList.PROCEDURE_LIST[operationNum][procedurePanelNum][0]);
         procedureNameLabel.setHorizontalAlignment(JLabel.CENTER);
-        JLabel procedureValueLabel = new JLabel("Value: ");
+        JLabel procedureValueLabel = new JLabel("値: ");
         procedureValueLabel.setHorizontalAlignment(JLabel.CENTER);
 
         JPanel procedureNameAndValuePanel = new JPanel(new GridLayout(2, 1));
@@ -151,7 +172,7 @@ public class ProcedureScreen {
             numberButtons[i].addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     valueStr += tempValue;
-                    procedureValueLabel.setText("Value: " + valueStr);
+                    procedureValueLabel.setText(createProcedureValueLabelText());
                     updateChecklist();
                 }
             });
@@ -159,8 +180,10 @@ public class ProcedureScreen {
         pointButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (!valueStr.contains(".")) {
+                    // valueStrに.（小数点）が含まれていない場合に限り，
+                    // これに.を追加する．
                     valueStr += ".";
-                    procedureValueLabel.setText("Value: " + valueStr);
+                    procedureValueLabel.setText(createProcedureValueLabelText());
                 }
                 updateChecklist();
             }
@@ -169,7 +192,7 @@ public class ProcedureScreen {
             public void actionPerformed(ActionEvent e) {
                 if (valueStr.length() > 0) {
                     valueStr = valueStr.substring(0, valueStr.length() - 1);
-                    procedureValueLabel.setText("Value: " + valueStr);
+                    procedureValueLabel.setText(createProcedureValueLabelText());
                 }
                 updateChecklist();
             }
@@ -179,12 +202,27 @@ public class ProcedureScreen {
         return procedureKeyboardPanel;
     }
 
+    // procedureValueLabelのテキストを作成するメゾットである．
+    private String createProcedureValueLabelText() {
+        StringBuilder procedureValueBuf = new StringBuilder();
+        procedureValueBuf.append("値: ");
+        procedureValueBuf.append(valueStr);
+        return procedureValueBuf.toString();
+    }
+
+    // valueStrの更新に伴い，該当するchecklistの値を更新するメゾットである．
     private void updateChecklist() {
         if (valueStr.equals(".")) {
+            // valueStrが.のときは，該当するchecklistの値を0.0に更新する．
+            // これは，この状態でdouble型への変換を行うと，
+            // エラーが発生してしまうためである．
             procedureDocData.checklist.put(ProcedureList.PROCEDURE_LIST[operationNum][procedurePanelNum][0], 0.0);
         } else if (valueStr.equals("")) {
+            // valueStrが空文字のときは，記録が行われていないため，
+            // 該当するchecklistの値を-1.0に更新する．
             procedureDocData.checklist.put(ProcedureList.PROCEDURE_LIST[operationNum][procedurePanelNum][0], -1.0);
         } else {
+            // これ以外の場合は，valueStrをdouble型に変換し，該当するchecklistの値を更新する．
             procedureDocData.checklist.put(ProcedureList.PROCEDURE_LIST[operationNum][procedurePanelNum][0],
                     Double.parseDouble(valueStr));
         }

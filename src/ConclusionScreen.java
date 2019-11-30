@@ -9,7 +9,7 @@ public class ConclusionScreen {
 
     private ProcedureDocData procedureDocData;
     private String SCREEN_NAME;
-    private int operationNum = -1;
+    private int operationNum;
     private JLabel idLabel = new JLabel();
     private JLabel dateLabel = new JLabel();
     private JLabel operataionNameLabel = new JLabel();
@@ -27,6 +27,8 @@ public class ConclusionScreen {
         main_panels.add(createConclusionScreenPanel(), SCREEN_NAME);
     }
 
+    // 「次へ >」ボタンがクリックされるたびに，
+    // クリックされたときのchecklistのデータをもとに，この画面を更新する．
     public int update(String currentScreenName) {
         if (currentScreenName.equals(SCREEN_NAME)) {
             procedureDocData.printChecklist();
@@ -58,12 +60,15 @@ public class ConclusionScreen {
         operataionNameLabel.setText(operationNumBuf.toString());
         operataionNameLabel.setHorizontalAlignment(JLabel.CENTER);
 
+        // conclusionLabelListのそれぞれの要素に，
+        // テキストとして実行された操作手順名を順に代入する．
         int k = 0;
         for (int i = 0; i < ProcedureList.PROCEDURE_LIST[operationNum].length; i++) {
             for (int j = 0; j < ProcedureList.PROCEDURE_LIST[operationNum][i].length; j++) {
                 StringBuilder conclusionLabelBuf = new StringBuilder();
                 conclusionLabelBuf.append(ProcedureList.PROCEDURE_LIST[operationNum][i][j]);
                 if (ProcedureList.PROCEDURE_LIST_INFO[operationNum][i][1] == 1) {
+                    // 記録を行う操作手順である場合，記録した値も出力する．
                     if (procedureDocData.checklist.get(ProcedureList.PROCEDURE_LIST[operationNum][i][j]) > -1.0) {
                         conclusionLabelBuf.append(": ");
                         conclusionLabelBuf.append(
@@ -79,9 +84,11 @@ public class ConclusionScreen {
                 }
             }
         }
+        // 次の画面に行ってはいけない場合が存在しないため，1（真）を返す．
         return 1; // ok
     }
 
+    // 実行した操作手順を表示するパネルを生成するメゾットである
     private JPanel createConclusionScreenPanel() {
         JPanel idDateOperationNamePanel = new JPanel(new GridLayout(1, 3));
         idDateOperationNamePanel.add(idLabel);
@@ -93,6 +100,7 @@ public class ConclusionScreen {
 
         JPanel conclusionPanel = new JPanel(new GridLayout(ProcedureList.PROCEDURE_LIST_NUM[operationNum] + 1, 1));
         conclusionPanel.add(conclusionNotationLabel);
+        // 空文字列のラベルを全操作手順数分生成する．
         int k = 0;
         for (int i = 0; i < ProcedureList.PROCEDURE_LIST[operationNum].length; i++) {
             for (int j = 0; j < ProcedureList.PROCEDURE_LIST[operationNum][i].length; j++) {
