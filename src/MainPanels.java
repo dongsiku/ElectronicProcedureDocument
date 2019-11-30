@@ -15,7 +15,7 @@ class MainPanels {
     private int SELECT_OPERATION_SCREEN = 2;
     private int CONCLUSION_SCREEN_ONE_NUM = 7;
     private int CONCLUSION_SCREEN_TWO_NUM = 16;
-    private ProcedureDocData procedureDocData = new ProcedureDocData();
+    private ProcedureDocData procedureDocData;
 
     MainPanels(ProcedureDocData procedure_doc_data) {
         mainPanels.setLayout(layout);
