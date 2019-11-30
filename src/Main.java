@@ -24,7 +24,8 @@ class Main {
 
 		ProcedureDocData procedureDocData = new ProcedureDocData();
 
-		PrevNextButton prevnextButton = new PrevNextButton(container);
+		PrevNextButton prevnextButton = new PrevNextButton();
+		container.add(prevnextButton.prevnextButtonPanel, BorderLayout.NORTH);
 
 		MainPanels mainPanels = new MainPanels(procedureDocData);
 		InitialScreen initialScreen = new InitialScreen(mainPanels);
