@@ -61,7 +61,7 @@ public class SelectOperationScreen {
                     if (operationCheckbox[this_box_num].isSelected()) {
                         operationCheckbox[another_box_num].setSelected(false);
                         operationNum = this_box_num;
-                        prevNextButton.setNextButtonDefaultText();
+                        prevNextButton.setNextButtonStandardText();
                     } else {
                         operationNum = -1;
                         prevNextButton.nextButton.setText("");

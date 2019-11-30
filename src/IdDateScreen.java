@@ -75,7 +75,7 @@ public class IdDateScreen {
                     }
                     setIdLabel();
                     if (idNumStr.length() == 4) {
-                        prevNextButton.setNextButtonDefaultText();
+                        prevNextButton.setNextButtonStandardText();
                     } else {
                         prevNextButton.nextButton.setText("");
                     }

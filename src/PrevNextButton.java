@@ -28,11 +28,11 @@ public class PrevNextButton {
         prevButton.setText("");
     }
 
-    public void setNextButtonDefaultText() {
+    public void setNextButtonStandardText() {
         nextButton.setText("次へ >");
     }
 
-    public void setPrevButtonDefaultText() {
+    public void setPrevButtonStandardText() {
         prevButton.setText("< 前へ");
     }
 }

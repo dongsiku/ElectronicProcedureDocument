@@ -76,8 +76,8 @@ class Main extends JFrame {
 	}
 
 	private static void prevnextCommon(String currentScreenName, PrevNextButton prevnextButton, String idNumStr) {
-		prevnextButton.setNextButtonDefaultText();
-		prevnextButton.setPrevButtonDefaultText();
+		prevnextButton.setNextButtonStandardText();
+		prevnextButton.setPrevButtonStandardText();
 		if ((currentScreenName.equals("SelectOperationScreen"))
 				|| (currentScreenName.equals("IdDateScreen") && idNumStr.length() < 4)) {
 			prevnextButton.nextButton.setText("");
