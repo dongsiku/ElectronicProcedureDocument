@@ -6,26 +6,26 @@ import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.List;
 
-class Main {
+class Main extends JFrame {
+
+	private static final long serialVersionUID = 0;
 
 	public static void main(String[] args) {
-		createElectronicProcedureDocument();
+		Main ElectronicProcedureDocument = new Main();
+		ElectronicProcedureDocument.setVisible(true);
 	}
 
-	private static void createElectronicProcedureDocument() {
-		JFrame frame = new JFrame("電子化手順書");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	Main() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		ImageIcon icon = new ImageIcon("icon/icon.png");
-		frame.setIconImage(icon.getImage());
-
-		Container container = frame.getContentPane();
-		container.setBackground(Color.white);
+		setIconImage(icon.getImage());
+		setBackground(Color.white);
 
 		ProcedureDocData procedureDocData = new ProcedureDocData();
 
 		PrevNextButton prevnextButton = new PrevNextButton();
-		container.add(prevnextButton.prevnextButtonPanel, BorderLayout.NORTH);
+		add(prevnextButton.prevnextButtonPanel, BorderLayout.NORTH);
 
 		MainPanels mainPanels = new MainPanels(procedureDocData);
 		InitialScreen initialScreen = new InitialScreen(mainPanels);
@@ -70,10 +70,9 @@ class Main {
 			}
 		});
 
-		container.add(mainPanels.mainPanels);
-		frame.setLocation(200, 100);
-		frame.setSize(640, 480);
-		frame.setVisible(true);
+		add(mainPanels.mainPanels);
+		setLocation(200, 100);
+		setSize(640, 480);
 	}
 
 	private static void prevnextCommon(String currentScreenName, PrevNextButton prevnextButton, String idNumStr) {
