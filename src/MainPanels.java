@@ -12,7 +12,7 @@ class MainPanels {
     private List<String> screenNameList = new ArrayList<>();
     private int currentScreenNum = 0;
     private int PROCEDURE_SCREEN_TWO_NUM = 8;
-    private int SELECT_OPERATION_SCREEN = 2;
+    private int SELECT_OPERATION_SCREEN_NUM = 2;
     private int CONCLUSION_SCREEN_ONE_NUM = 7;
     private int CONCLUSION_SCREEN_TWO_NUM = 16;
     private ProcedureDocData procedureDocData;
@@ -29,7 +29,7 @@ class MainPanels {
     }
 
     public void next() {
-        if ((procedureDocData.data.get("operationNum") == 1) && (currentScreenNum == SELECT_OPERATION_SCREEN)) {
+        if ((procedureDocData.data.get("operationNum") == 1) && (currentScreenNum == SELECT_OPERATION_SCREEN_NUM)) {
             currentScreenNum = PROCEDURE_SCREEN_TWO_NUM;
         } else if ((currentScreenNum == CONCLUSION_SCREEN_ONE_NUM) || (currentScreenNum == CONCLUSION_SCREEN_TWO_NUM)) {
             System.exit(0);
@@ -42,7 +42,7 @@ class MainPanels {
 
     public void previous() {
         if (currentScreenNum == PROCEDURE_SCREEN_TWO_NUM) {
-            currentScreenNum = SELECT_OPERATION_SCREEN;
+            currentScreenNum = SELECT_OPERATION_SCREEN_NUM;
         } else if ((currentScreenNum == CONCLUSION_SCREEN_ONE_NUM) || (currentScreenNum == CONCLUSION_SCREEN_TWO_NUM)) {
             currentScreenNum = 0;
         } else if (currentScreenNum > 0) {
