@@ -117,5 +117,4 @@ public class ConclusionScreen {
         conclusionScreenPanel.add(conclusionPanel, BorderLayout.CENTER);
         return conclusionScreenPanel;
     }
-
 }
