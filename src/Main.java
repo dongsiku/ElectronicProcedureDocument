@@ -18,6 +18,7 @@ class Main extends JFrame {
 	}
 
 	Main() {
+		setTitle("電子化手順書");
 		setBackground(Color.white);
 
 		// 閉じるボタンを押したときに，プログラムが終了するように設定する．
