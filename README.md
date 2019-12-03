@@ -17,3 +17,11 @@
 
 なお，実用的な画面インターフェイスでは，入力ミスなどに対する取り消し機能が必要であるが，ここでは取消機能については考えなくて良い．
 また，ユーザは正しい操作を行うものと仮定して良い．
+
+## 起動方法
+
+```shell-session:HowToRun
+cd ElectronicProcedureDocument/
+javac src/Main.java
+java src.Main
+```
