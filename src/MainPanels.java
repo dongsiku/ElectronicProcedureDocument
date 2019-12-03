@@ -72,6 +72,8 @@ class MainPanels {
             // 前の画面に遷移する．
             currentScreenNum -= 1;
         }
+        // 現在の画面の名前を標準出力に出力する．
+        System.out.printf("This screen is %s\n", screenNameList.get(currentScreenNum));
         // 画面を上で指定された画面に更新する．
         layout.show(mainPanels, screenNameList.get(currentScreenNum));
     }

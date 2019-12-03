@@ -60,15 +60,15 @@ public class ConclusionScreen {
         operataionNameLabel.setText(operationNumBuf.toString());
         operataionNameLabel.setHorizontalAlignment(JLabel.CENTER);
 
-        // conclusionLabelListのそれぞれの要素に，
-        // テキストとして実行された操作手順名を順に代入する．
+        // conclusionLabelListのそれぞれの要素のテキストに，
+        // 実行された操作手順名を順に代入する．
         int k = 0;
         for (int i = 0; i < ProcedureList.PROCEDURE_LIST[operationNum].length; i++) {
             for (int j = 0; j < ProcedureList.PROCEDURE_LIST[operationNum][i].length; j++) {
                 StringBuilder conclusionLabelBuf = new StringBuilder();
                 conclusionLabelBuf.append(ProcedureList.PROCEDURE_LIST[operationNum][i][j]);
                 if (ProcedureList.PROCEDURE_LIST_INFO[operationNum][i][1] == 1) {
-                    // 記録を行う操作手順である場合，記録した値も出力する．
+                    // 記録を行う操作手順である場合，操作手順と記録した値を出力する．
                     if (procedureDocData.checklist.get(ProcedureList.PROCEDURE_LIST[operationNum][i][j]) > -1.0) {
                         conclusionLabelBuf.append(": ");
                         conclusionLabelBuf.append(
@@ -77,6 +77,7 @@ public class ConclusionScreen {
                         k += 1;
                     }
                 } else {
+                    // 確認のみを行う操作手順である場合，操作手順のみを出力する．
                     if (procedureDocData.checklist.get(ProcedureList.PROCEDURE_LIST[operationNum][i][j]) > 0.0) {
                         conclusionLabelList.get(k).setText(conclusionLabelBuf.toString());
                         k += 1;
